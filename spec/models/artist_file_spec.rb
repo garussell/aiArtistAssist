@@ -8,4 +8,8 @@ RSpec.describe ArtistFile, type: :model do
     it { should validate_presence_of(:goals) }
     it { should validate_presence_of(:action_steps) }
   end
+
+  describe 'relationships' do
+    it { should belong_to(:artist) }
+  end
 end
