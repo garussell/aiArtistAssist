@@ -56,6 +56,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "pry"
   gem "rspec-rails"
+  gem "capybara"
   gem "simplecov"
   gem "shoulda-matchers"
   gem "webmock"
