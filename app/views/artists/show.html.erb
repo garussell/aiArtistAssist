@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist AI Assist</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+   <div class="artist-info">
+    <h1>Hello <%= @artist.name %></h1>
+    <div><strong>Style:</strong> <%= @artist.style %></div>
+    <div><strong>Bio:</strong> <%= @artist.bio %></div>
+
+    <div><%= link_to "Edit Info", edit_artist_path(@artist) %></div>
+    <div>
+      <%= button_to "Delete Profile", artist_path(@artist), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'delete-button' %>
+    </div>
+  </div>
+
+</body>
+</html>
+

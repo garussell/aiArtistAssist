@@ -8,10 +8,14 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'rails-ujs' %>
   </head>
 
   <body>
-
+        <div id="app-topper">
+          <%= render 'shared/navbar' %>
+        </div>
+        
         <% if flash.any? %> 
           <% flash.each do |type, msg| %>
               <% if type == "success" %>

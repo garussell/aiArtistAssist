@@ -1,11 +1,15 @@
 class ArtistsController < ApplicationController
-  # def index
-  #   @artists = Artist.all
-  # end
+  def index; end
 
   def show
     @artist = Artist.find_by(id: params[:id])
-    @artist_files = ArtistFile.where(artist_id: params[:id])
+
+    if @artist.nil?
+      flash[:warning] = "Artist not found"
+      redirect_to root_path
+    else
+      @artist_files = ArtistFile.where(artist_id: params[:id])
+    end
   end
 
   def new
@@ -34,17 +38,12 @@ class ArtistsController < ApplicationController
   end
 
   def destroy
-    artist = Artist.find_by(id: params[:id])
-    artist.destroy
-    redirect_to artists_path
-  end
+    @artist = Artist.find_by(id: params[:id])
+    
+    @artist.destroy
 
-  def login
-  end
-
-  def logout
-    session.clear
-    redirect_to artists_login_path
+    flash[:success] = "Your profile has been deleted"
+    redirect_to root_path
   end
 
   private
