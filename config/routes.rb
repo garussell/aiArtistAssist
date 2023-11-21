@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-  get 'sessions/logout'
-  
-  # root 'home#index'
+  root 'dashboard#index'
+
+  # Artist Resources
+  resources :artists
 
   # Login/Logout
-  get "/artists/login", to: "artists#login"
+  # get "/artists/login", to: "artists#login"
   post "/artists/login", to: "sessions#new"
   get "/artists/logout", to: "sessions#logout"
 
-  # Artist Resources
-  resources :artists, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # AI API Endpoint
   namespace :api do
