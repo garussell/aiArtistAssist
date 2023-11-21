@@ -18,12 +18,16 @@ RSpec.describe 'Artist LogIn Page' do
       password: "password2"
     )
 
-    visit artists_login_path
+    visit root_path
   end
 
   describe 'As a visitor' do
     describe 'When I visit the root path page' do
+      it "I see a link to login '/artists/login'" do
+        expect(page).to have_link("Login")
+      end
       it "I see a place to enter my email and password" do
+  
         expect(page).to have_field("email")
         expect(page).to have_field("password")
         expect(page).to have_button("Login")
@@ -38,12 +42,13 @@ RSpec.describe 'Artist LogIn Page' do
       end
 
       it "SAD PATH: If I enter an invalid email and password, I am redirected to the root path page and see a flash message" do
+        
         fill_in "email", with: @artist1.email
         fill_in "password", with: "wrongpassword"
         click_button "Login"
 
-        expect(current_path).to eq artists_login_path
-        expect(page).to have_content("Invalid email or password")
+        expect(current_path).to eq root_path
+        expect(page).to have_content("Artist not found")
       end
     end
   end
