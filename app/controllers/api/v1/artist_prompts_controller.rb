@@ -15,7 +15,7 @@ class Api::V1::ArtistPromptsController < ApplicationController
 
         render json: ResponseSerializer.new(prompt_response)
       else
-        render json: ErrorSerializer.format_errors("You must provide your creative goals."), status: :unprocessable_entity
+        render json: ErrorSerializer.format_errors("You must share your goal for this to work."), status: :unprocessable_entity
       end
 
     rescue ActiveRecord::RecordNotFound

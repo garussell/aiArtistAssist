@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "PostArtistPrompts", type: :request do
   before do
-    @artist = Artist.create(name: "Bob", style: "Pop", bio: "I'm a singer", password: "123")
+    @artist = Artist.create(name: "Bob", email: "fake@gmail.com", style: "Pop", bio: "I'm a singer", password: "123")
   end
 
   describe "/post_idea", :vcr do
@@ -50,7 +50,7 @@ RSpec.describe "PostArtistPrompts", type: :request do
 
       results = response_data[:errors][0][:detail]
 
-      expect(results).to eq("You must provide your creative goals.")
+      expect(results).to eq("You must share your goal for this to work.")
     end
   end
 end
