@@ -1,0 +1,25 @@
+<h2>Update Info</h2>
+<%= form_with model: @artist, method: :patch, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name, placeholder: "Preferred Name" %>
+  <br />
+  <%= form.label :email %>
+  <%= form.email_field :email, placeholder: "Email" %>
+  <br />
+  <%= form.label :style %>
+  <%= form.text_field :style, placeholder: "Style" %>
+  <br />
+  <%= form.label :bio %>
+  <%= form.text_area :bio, placeholder: "Bio" %>
+  <br />
+  <%= form.label :password %>
+  <%= form.password_field :password, placeholder: "Enter new password" %>
+  <br />
+  <%= form.label :password_confirmation %>
+  <%= form.password_field :password_confirmation, placeholder: "Confirm new password" %>
+  <br />
+  <%= form.submit "Update Profile" %>
+  <br />
+
+  <%= link_to "Cancel", :back %>
+<% end %>

@@ -1,8 +1,27 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-artist = Artist.create!(name: "Bill", style: "Pop", bio: "I'm a singer", password: "123")
+
+
+10.times do
+  artist = Artist.create!(
+    name: Faker::Artist.name,
+    email: Faker::Internet.email,
+    style: Faker::Music.genre,
+    bio: Faker::TvShows::MichaelScott.quote,
+    password: "password"
+  )
+  puts "Artist #{artist.id} created"
+
+  3.times do
+    artist.artist_files.create!(
+      image_url: Faker::LoremFlickr.image,
+        resources: Faker::Quote.jack_handey,
+        goals: Faker::TvShows::Friends.quote,
+        action_steps: Faker::Quote.famous_last_words
+      )
+  end
+
+  puts "3 artist files created for artist #{artist.id}"
+end
+
+puts
+puts "Seed finished"
+puts "10 artists created with 3 artist files each"

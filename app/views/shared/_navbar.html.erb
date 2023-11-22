@@ -1,0 +1,12 @@
+<nav>
+  <div class="nav navbar-nav">
+    <% unless current_page?(root_path) %>
+      <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
+    <% end %>
+
+    <% unless !session[:artist_id] %>
+      <p class="nav-item"><%= link_to 'Logout', sessions_logout_path, class: "nav-link" %></p>
+    <% end %>
+  </div>
+</nav>
+          
