@@ -89,16 +89,21 @@ RSpec.describe "Artist Show Page" do
         expect(page).to_not have_content("Collection of Ideas")
       end
 
-      it "responds with a prompt when I click 'Get Prompt'", :vcr do
-        fill_in "artist_file[goals]", with: "I want to write a song about the ocean"
-        click_on "Get Prompt"
+      it "has a section that displays content when there is at least one artist file" do
+        artist_file1 = @artist1.artist_files.create!(
+          image_url: Faker::LoremFlickr.image,
+          resources: Faker::Quote.jack_handey,
+          goals: Faker::TvShows::Friends.quote,
+          action_steps: Faker::Quote.famous_last_words
+        )
 
+        visit artist_path(@artist1)
+        
         expect(page).to have_content("Collection of Ideas")
-        expect(page).to have_content("Created:")
-        expect(page).to have_content("Image:")
-        expect(page).to have_content("Goals:")
-        expect(page).to have_content("Action Steps:")
-        expect(page).to have_content("Resources:")
+        expect(page).to have_content(artist_file1.goals)
+        expect(page).to have_content(artist_file1.action_steps)
+        expect(page).to have_content(artist_file1.resources)
+        expect(page).to have_content(artist_file1.image_url)
       end
     end
   end
