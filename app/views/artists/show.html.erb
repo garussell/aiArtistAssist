@@ -36,12 +36,12 @@
   </div>
   <div class="collection-of-prompts">
     <% if @artist_files.count > 0 %>
-      <h2>Collection of Ideas</h2>
       <ul>
+        <li><h2>Collection of Ideas</h2></li>
         <% @artist_files.reverse_each do |artist_file| %>
           <li>
+            <div><strong>Image:</strong> <%= image_tag artist_file.image_url, alt: "file-image" %></div>
             <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
-            <div><strong>Image:</strong> <%= artist_file.image_url %></div>
             <div><strong>Goals:</strong> <%= artist_file.goals %></div>
             <div><strong>Action Steps:</strong> <%= artist_file.action_steps %></div>
             <div><strong>Resources:</strong> <%= artist_file.resources %></div>
