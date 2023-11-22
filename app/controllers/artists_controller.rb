@@ -18,11 +18,12 @@ class ArtistsController < ApplicationController
 
   def create
     artist = Artist.new(artist_params)
-    if artist.save
+    if password_match?(artist) && artist.save 
+      flash[:success] = "Your profile has been created"
       session[:artist_id] = artist.id
       redirect_to artist_path(artist)
     else
-      flash[:errors] = artist.errors.full_messages
+      flash[:warning] = "Invalid entry, please try again"
       redirect_to new_artist_path
     end
   end
@@ -61,5 +62,9 @@ class ArtistsController < ApplicationController
 
   def artist_params
     params.require(:artist).permit(:name, :email, :style, :bio, :password)
+  end
+
+  def password_match?(artist)
+    params[:artist][:password] == params[:artist][:password_confirmation]
   end
 end
