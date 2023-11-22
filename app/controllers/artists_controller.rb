@@ -22,8 +22,11 @@ class ArtistsController < ApplicationController
       flash[:success] = "Your profile has been created"
       session[:artist_id] = artist.id
       redirect_to artist_path(artist)
+    elsif !password_match?(artist)
+      flash[:warning] = "Passwords do not match"
+      redirect_to new_artist_path
     else
-      flash[:warning] = "Invalid entry, please try again"
+      flash[:warning] = artist.errors.full_messages.join(", ")
       redirect_to new_artist_path
     end
   end
@@ -40,11 +43,14 @@ class ArtistsController < ApplicationController
   def update
     @artist = Artist.find_by(id: session[:artist_id])
     
-    if @artist.update(artist_params)
+    if @artist.update(artist_params) && password_match?(@artist) 
       flash[:success] = "Your profile has been updated"
       redirect_to artist_path(@artist)
+    elsif !password_match?(@artist)
+      flash[:warning] = "Passwords do not match"
+      redirect_to edit_artist_path(@artist)
     else
-      flash[:errors] = @artist.errors.full_messages
+      flash[:warning] = @artist.errors.full_messages.join(", ")
       redirect_to edit_artist_path(@artist)
     end
   end
@@ -65,6 +71,10 @@ class ArtistsController < ApplicationController
   end
 
   def password_match?(artist)
-    params[:artist][:password] == params[:artist][:password_confirmation]
-  end
+    if params[:artist][:password] == params[:artist][:password_confirmation]
+      true
+    else
+      false
+    end
+  end  
 end

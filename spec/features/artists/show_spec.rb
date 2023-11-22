@@ -14,7 +14,6 @@ RSpec.describe "Artist Show Page" do
     fill_in "email", with: @artist1.email
     fill_in "password", with: @artist1.password
     click_button "Login"
-    # visit artist_path(@artist1)
   end
 
   describe "As a visitor" do
@@ -68,6 +67,13 @@ RSpec.describe "Artist Show Page" do
         click_on "Logout"
 
         expect(page).to have_content("You have successfully logged out")
+        expect(current_path).to eq(root_path)
+      end
+
+      it "flashes a message 'artist not found' if artist does not exist" do
+        visit artist_path(10000)
+
+        expect(page).to have_content("Artist not found")
         expect(current_path).to eq(root_path)
       end
     end

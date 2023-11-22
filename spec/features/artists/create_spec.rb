@@ -49,7 +49,7 @@ RSpec.describe "Create Artist Provile", type: :feature do
         click_on "Create Profile"
 
         expect(current_path).to eq(new_artist_path)
-        expect(page).to have_content("Invalid entry, please try again")
+        expect(page).to have_content("Email can't be blank")
       end
 
       it "SAD PATH: When I fill in the form with invalid style, I am redirected to the new artist page and see a flash message" do
@@ -63,7 +63,7 @@ RSpec.describe "Create Artist Provile", type: :feature do
         click_on "Create Profile"
 
         expect(current_path).to eq(new_artist_path)
-        expect(page).to have_content("Invalid entry, please try again")
+        expect(page).to have_content("Style can't be blank")
       end
 
       it "SAD PATH: When I fill in the form with invalid bio, I am redirected to the new artist page and see a flash message" do
@@ -77,7 +77,7 @@ RSpec.describe "Create Artist Provile", type: :feature do
         click_on "Create Profile"
 
         expect(current_path).to eq(new_artist_path)
-        expect(page).to have_content("Invalid entry, please try again")
+        expect(page).to have_content("Bio can't be blank")
       end
 
       it "SAD PATH: When I fill in the form with invalid password, I am redirected to the new artist page and see a flash message" do
@@ -91,7 +91,7 @@ RSpec.describe "Create Artist Provile", type: :feature do
         click_on "Create Profile"
 
         expect(current_path).to eq(new_artist_path)
-        expect(page).to have_content("Invalid entry, please try again")
+        expect(page).to have_content("Passwords do not match")
       end
 
       it "SAD PATH: When I fill in the form with invalid password confirmation, I am redirected to the new artist page and see a flash message" do
@@ -105,7 +105,7 @@ RSpec.describe "Create Artist Provile", type: :feature do
         click_on "Create Profile"
 
         # expect(current_path).to eq(new_artist_path)
-        expect(page).to have_content("Invalid entry, please try again")
+        expect(page).to have_content("Passwords do not match")
       end
     end
   end
