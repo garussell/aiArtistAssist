@@ -26,6 +26,6 @@ class Api::V1::ArtistPromptsController < ApplicationController
   private
 
   def artist_params
-    params.permit(:goals) 
+    params.permit(:id, :goals) 
   end
 end

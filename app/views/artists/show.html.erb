@@ -21,6 +21,42 @@
     </div>
   </div>
 
+  <div class="ai-prompt-section">
+    <h2>AI Prompt</h2>
+    <%= form_for [@artist, ArtistFile.new] do |f| %>
+      <div>
+        <h3>What can you tell me about your next creative project?</h3>
+        <%= f.label :goals %>
+        <%= f.text_area :goals %>
+      </div>
+      <div>
+        <%= f.submit "Get Prompt" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="collection-of-prompts">
+    <% if @artist_files.count > 0 %>
+      <ul>
+        <li><h2>Collection of Ideas</h2></li>
+        <% @artist_files.reverse_each do |artist_file| %>
+          <li>
+            <div><strong>Image:</strong> <%= image_tag artist_file.image_url, alt: "file-image" %></div>
+            <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
+            <div><strong>Goals:</strong> <%= artist_file.goals %></div>
+            <div><strong>Action Steps:</strong> <%= artist_file.action_steps %></div>
+            <div><strong>Resources:</strong> <%= artist_file.resources %></div>
+            <br />
+            <div><%= link_to "Edit Prompt", edit_artist_artist_file_path(@artist, artist_file) %></div>
+            <br />
+            <div>
+              <%= button_to "Delete Prompt", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'delete-button' %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    
+    <% end %>
+  </div>
 </body>
 </html>
 

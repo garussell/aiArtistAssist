@@ -77,5 +77,34 @@ RSpec.describe "Artist Show Page" do
         expect(current_path).to eq(root_path)
       end
     end
+
+    describe "#ai-prompt-section" do
+      it "I see a section for ai prompts" do
+        expect(page).to have_content("AI Prompt")
+        expect(page).to have_content("What can you tell me about your next creative project?")
+        expect(page).to have_field("artist_file[goals]")
+
+        expect(page).to have_button("Get Prompt")
+        
+        expect(page).to_not have_content("Collection of Ideas")
+      end
+
+      it "has a section that displays content when there is at least one artist file" do
+        artist_file1 = @artist1.artist_files.create!(
+          image_url: Faker::LoremFlickr.image,
+          resources: Faker::Quote.jack_handey,
+          goals: Faker::TvShows::Friends.quote,
+          action_steps: Faker::Quote.famous_last_words
+        )
+
+        visit artist_path(@artist1)
+        
+        expect(page).to have_content("Collection of Ideas")
+        expect(page).to have_content(artist_file1.goals)
+        expect(page).to have_content(artist_file1.action_steps)
+        expect(page).to have_content(artist_file1.resources)
+        expect(page).to have_content(artist_file1.image_url)
+      end
+    end
   end
 end
