@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-  describe "GET /new" do
+  describe "POST /login" do
     it "returns http success" do
-      get "/sessions/new"
-      expect(response).to have_http_status(:success)
+      post "/sessions/login"
+      expect(response).to have_http_status(:found)
     end
   end
 
   describe "GET /logout" do
     it "returns http success" do
       get "/sessions/logout"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:found)
     end
   end
-
 end

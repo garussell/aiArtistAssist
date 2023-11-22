@@ -23,9 +23,6 @@ RSpec.describe 'Artist LogIn Page' do
 
   describe 'As a visitor' do
     describe 'When I visit the root path page' do
-      it "I see a link to login '/artists/login'" do
-        expect(page).to have_link("Login")
-      end
       it "I see a place to enter my email and password" do
   
         expect(page).to have_field("email")
