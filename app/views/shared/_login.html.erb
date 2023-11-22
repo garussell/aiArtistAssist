@@ -3,7 +3,7 @@
   <p>New to Artist AI Assist? <%= link_to "Click Here to create an account", new_artist_path %></p>
   <h2>Artist login</h2>
 
-  <%= form_with(url: artists_login_path, method: :post, id: "user-login-form", local: true) do |form| %>
+  <%= form_with(url: sessions_login_path, method: :post, id: "user-login-form", local: true) do |form| %>
     <%= form.label :email, "Email" %>
     <%= form.text_field :email, placeholder: "Enter your email" %>
     <br />

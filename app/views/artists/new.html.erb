@@ -1,5 +1,5 @@
 <h2>Create A Profile</h2>
-  <%= form_with(model: @artist, url: artist_path(@artist.id), method: :post, local: true) do |form| %>
+  <%= form_with(model: @artist, url: artists_path, method: :post, local: true) do |form| %>
 
   <%= form.label :name %>
   <%= form.text_field :name, placeholder: "Preferred Name" %>

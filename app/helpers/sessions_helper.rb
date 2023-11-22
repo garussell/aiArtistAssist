@@ -1,5 +1,5 @@
 module SessionsHelper
-  def login(artist)
+  def new_session(artist)
     session[:artist_id] = artist.id
   end
 

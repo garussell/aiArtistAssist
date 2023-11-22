@@ -28,13 +28,24 @@ class ArtistsController < ApplicationController
   end
 
   def edit
-    @artist = Artist.find_by(id: params[:id])
+    if session[:artist_id].nil?
+      flash[:warning] = "You must be logged in to edit your profile"
+      redirect_to root_path
+    else
+      @artist = Artist.find_by(id: session[:artist_id])
+    end
   end
 
   def update
-    artist = Artist.find_by(id: params[:id])
-    artist.update(artist_params)
-    redirect_to artist_path(artist)
+    @artist = Artist.find_by(id: session[:artist_id])
+    
+    if @artist.update(artist_params)
+      flash[:success] = "Your profile has been updated"
+      redirect_to artist_path(@artist)
+    else
+      flash[:errors] = @artist.errors.full_messages
+      redirect_to edit_artist_path(@artist)
+    end
   end
 
   def destroy

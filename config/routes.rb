@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   # Login/Logout
   # get "/artists/login", to: "artists#login"
-  post "/artists/login", to: "sessions#new"
-  get "/artists/logout", to: "sessions#logout"
+  post "/sessions/login", to: "sessions#login"
+  get "/sessions/logout", to: "sessions#logout"
 
 
   # AI API Endpoint

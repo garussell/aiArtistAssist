@@ -1,5 +1,5 @@
 <h2>Update Info</h2>
-<%= form_with model: @user, method: :patch, local: true do |form| %>
+<%= form_with model: @artist, method: :patch, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name, placeholder: "Preferred Name" %>
   <br />
@@ -12,8 +12,8 @@
   <%= form.label :bio %>
   <%= form.text_area :bio, placeholder: "Bio" %>
   <br />
-  <%= form.label :new_password %>
-  <%= form.password_field :new_password, placeholder: "Enter new password" %>
+  <%= form.label :password %>
+  <%= form.password_field :password, placeholder: "Enter new password" %>
   <br />
   <%= form.label :password_verify %>
   <%= form.password_field :password_verify, placeholder: "Confirm new password" %>

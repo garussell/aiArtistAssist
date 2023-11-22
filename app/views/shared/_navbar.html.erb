@@ -1,10 +1,12 @@
 <nav>
-  <ul class="nav navbar-nav me-auto mb-2 mb-lg-0  navbar-right">
-    <% if !session[:artist_id] %>
-      <li class="nav-item"><%= link_to 'Login', artists_login_path, class: "nav-link" %></li>
-    <% else %>
-      <li class="nav-item"><%= link_to 'Logout', artists_logout_path, class: "nav-link" %></li>
+  <div class="nav navbar-nav">
+    <% unless current_page?(root_path) %>
+      <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
     <% end %>
-  </ul>
+
+    <% unless !session[:artist_id] %>
+      <p class="nav-item"><%= link_to 'Logout', sessions_logout_path, class: "nav-link" %></p>
+    <% end %>
+  </div>
 </nav>
           
