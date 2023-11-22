@@ -77,5 +77,29 @@ RSpec.describe "Artist Show Page" do
         expect(current_path).to eq(root_path)
       end
     end
+
+    describe "#ai-prompt-section" do
+      it "I see a section for ai prompts" do
+        expect(page).to have_content("AI Prompt")
+        expect(page).to have_content("What can you tell me about your next creative project?")
+        expect(page).to have_field("artist_file[goals]")
+
+        expect(page).to have_button("Get Prompt")
+        
+        expect(page).to_not have_content("Collection of Ideas")
+      end
+
+      it "responds with a prompt when I click 'Get Prompt'", :vcr do
+        fill_in "artist_file[goals]", with: "I want to write a song about the ocean"
+        click_on "Get Prompt"
+
+        expect(page).to have_content("Collection of Ideas")
+        expect(page).to have_content("Created:")
+        expect(page).to have_content("Image:")
+        expect(page).to have_content("Goals:")
+        expect(page).to have_content("Action Steps:")
+        expect(page).to have_content("Resources:")
+      end
+    end
   end
 end

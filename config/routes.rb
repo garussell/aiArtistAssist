@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   # Artist Resources
-  resources :artists
+  resources :artists do
+    resources :artist_files
+  end
 
   # Login/Logout
   # get "/artists/login", to: "artists#login"
