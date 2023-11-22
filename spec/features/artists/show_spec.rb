@@ -10,7 +10,11 @@ RSpec.describe "Artist Show Page" do
       password: "password"
     )
 
-    visit artist_path(@artist1)
+    visit root_path
+    fill_in "email", with: @artist1.email
+    fill_in "password", with: @artist1.password
+    click_button "Login"
+    # visit artist_path(@artist1)
   end
 
   describe "As a visitor" do
@@ -32,11 +36,11 @@ RSpec.describe "Artist Show Page" do
 
         expect(current_path).to eq(edit_artist_path(@artist1))
     
-        expect(page).to have_field(:name)
-        expect(page).to have_field(:email)
-        expect(page).to have_field(:style)
-        expect(page).to have_field(:bio)
-        expect(page).to have_field(:password)
+        expect(page).to have_field('artist[name]')
+        expect(page).to have_field('artist[email]')
+        expect(page).to have_field('artist[style]')
+        expect(page).to have_field('artist[bio]')
+        expect(page).to have_field('artist[password]')
 
         expect(page).to have_button("Update Profile")
         expect(page).to have_link("Cancel")

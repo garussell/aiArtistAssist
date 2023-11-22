@@ -48,7 +48,7 @@ RSpec.describe 'Artist LogIn Page' do
         click_button "Login"
 
         expect(current_path).to eq root_path
-        expect(page).to have_content("Artist not found")
+        expect(page).to have_content("Invalid email or password")
       end
     end
   end
