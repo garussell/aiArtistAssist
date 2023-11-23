@@ -1,8 +1,8 @@
 class AiService
   include OpenAiParameters
 
-  def self.get_image(style)
-    image_prompt = OpenAiParameters.image_prompt(style)
+  def self.get_image(content, style)
+    image_prompt = OpenAiParameters.image_prompt(content, style)
     image_response = get_response("/v1/images/generations", image_prompt)
 
     # Extract the image URL from the response

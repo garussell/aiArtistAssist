@@ -4,10 +4,10 @@ class AiFacade
   end
 
   def prompt_response
-    artist_style = Artist.pluck(:style).sample
+    style = Artist.pluck(:style).sample
 
-    prompt = AiService.artist_prompt(@goals, artist_style)
-    image = AiService.get_image(artist_style)
+    prompt = AiService.artist_prompt(@goals, style)
+    image = AiService.get_image(@goals, style)
 
     ArtistPath.new(prompt, image, @goals)
   end

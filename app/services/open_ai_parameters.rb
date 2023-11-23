@@ -1,7 +1,7 @@
 module OpenAiParameters
-  def self.image_prompt(style)
+  def self.image_prompt(content, style)
     {
-      "prompt": "New artwork with poetic reference to #{style}",
+      "prompt": "Produce a visually stunning artwork with a poetic reference to '#{style}'. Infuse the creation with the essence of the artist's goals: '#{content}'. Explore unique and imaginative elements to make the artwork truly exceptional.",
       "n": 1, # number of images to generate
       "size": "1024x1024", # size of image to generate
     }
