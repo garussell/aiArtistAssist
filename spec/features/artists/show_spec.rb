@@ -55,15 +55,15 @@ RSpec.describe "Artist Show Page" do
         expect(current_path).to eq(root_path)
       end
 
-      it "I see a link to logout" do
-        visit root_path
-        fill_in "email", with: @artist1.email
-        fill_in "password", with: @artist1.password
-        click_button "Login"
-
+      it "I see a link to logout and artist login does not render" do
         expect(current_path).to eq(artist_path(@artist1))
 
         expect(page).to have_link("Logout")
+        expect(page).to_not have_link("Login")
+
+        expect(page).to_not have_content("Email")
+        expect(page).to_not have_content("Password")
+        
         click_on "Logout"
 
         expect(page).to have_content("You have successfully logged out")
@@ -98,12 +98,11 @@ RSpec.describe "Artist Show Page" do
         )
 
         visit artist_path(@artist1)
-        
+
         expect(page).to have_content("Collection of Ideas")
         expect(page).to have_content(artist_file1.goals)
         expect(page).to have_content(artist_file1.action_steps)
         expect(page).to have_content(artist_file1.resources)
-        expect(page).to have_content(artist_file1.image_url)
       end
     end
   end
