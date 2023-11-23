@@ -1,7 +1,7 @@
 module OpenAiParameters
   def self.image_prompt(style)
     {
-      "prompt": "Edgy gothic art with elements of #{style}",
+      "prompt": "New artwork with poetic reference to #{style}",
       "n": 1, # number of images to generate
       "size": "1024x1024", # size of image to generate
     }

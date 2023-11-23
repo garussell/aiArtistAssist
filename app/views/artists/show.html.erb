@@ -14,8 +14,9 @@
     <h1>Hello <%= @artist.name %></h1>
     <div><strong>Style:</strong> <%= @artist.style %></div>
     <div><strong>Bio:</strong> <%= @artist.bio %></div>
-
-    <div><%= link_to "Edit Info", edit_artist_path(@artist) %></div>
+    <br />
+    <div><%= link_to "Edit Info", edit_artist_path(@artist), class: 'edit-button' %></div>
+    <br />
     <div>
       <%= button_to "Delete Profile", artist_path(@artist), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'delete-button' %>
     </div>
@@ -29,6 +30,7 @@
         <%= f.label :goals %>
         <%= f.text_area :goals %>
       </div>
+      <br />
       <div>
         <%= f.submit "Get Prompt" %>
       </div>
@@ -37,21 +39,19 @@
   <div class="collection-of-prompts">
     <% if @artist_files.count > 0 %>
       <ul>
-        <li><h2>Collection of Ideas</h2></li>
+        <h2>Collection of Ideas</h2><br />
         <% @artist_files.reverse_each do |artist_file| %>
-          <li>
-            <div><strong>Image:</strong> <%= image_tag artist_file.image_url, alt: "file-image" %></div>
+            <div><%= image_tag artist_file.image_url, alt: "file-image" %></div><br />
             <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
             <div><strong>Goals:</strong> <%= artist_file.goals %></div>
             <div><strong>Action Steps:</strong> <%= artist_file.action_steps %></div>
             <div><strong>Resources:</strong> <%= artist_file.resources %></div>
             <br />
-            <div><%= link_to "Edit Prompt", edit_artist_artist_file_path(@artist, artist_file) %></div>
-            <br />
             <div>
               <%= button_to "Delete Prompt", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'delete-button' %>
             </div>
-          </li>
+            <br />
+            <br />
         <% end %>
       </ul>
     

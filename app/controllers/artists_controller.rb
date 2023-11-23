@@ -59,6 +59,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.find_by(id: params[:id])
     
     @artist.destroy
+    log_out_artist
 
     flash[:success] = "Your profile has been deleted"
     redirect_to root_path

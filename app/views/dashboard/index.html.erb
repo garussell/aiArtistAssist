@@ -1,1 +1,5 @@
-<%= render 'shared/login' %>
+<% if !current_session %>
+  <%= render 'shared/login' %>
+<% else %>
+  <%= link_to "Back", artist_path(@artist) %> 
+<% end %>

@@ -10,7 +10,6 @@ class ArtistFilesController < ApplicationController
   end
 
   def create
-    # require 'pry';binding.pry
     artist = Artist.find(params[:artist_id])
     prompt_response = AiFacade.new(artist_file_params[:goals]).prompt_response
 
@@ -33,24 +32,16 @@ class ArtistFilesController < ApplicationController
     @artist_files = @artist.artist_files.all
   end
 
-  def edit
-    @artist_file = @artist.artist_files.find(params[:id])
-  end
-
-  def update
-    @artist_file = @artist.artist_files.find(params[:id])
-
-    if @artist_file.update(artist_file_params)
-      redirect_to artist_artist_files_path(@artist), notice: 'File updated successfully.'
-    else
-      render :edit
-    end
-  end
-
   def destroy
     @artist_file = @artist.artist_files.find(params[:id])
-    @artist_file.destroy
-    redirect_to artist_artist_files_path(@artist), notice: 'File deleted successfully.'
+
+    if @artist_file.destroy
+      flash[:success] = "File deleted successfully."
+    else
+      flash[:warning] = @artist_file.errors.full_messages.join(", ")
+    end
+
+      redirect_to artist_path(@artist)
   end
 
   private
