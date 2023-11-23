@@ -25,7 +25,7 @@ class AiService
     # Combine the responses
     {
       content: content_response,
-      resources: resources_response.dig(:choices, 0, :message, :content),
+      resources: resources_response.dig(:choices, 0, :message, :content)
     }
   end
 

@@ -9,7 +9,13 @@ RSpec.describe 'Artist Update Page' do
       bio: Faker::TvShows::MichaelScott.quote,
       password: "password"
     )
-
+    @artist1.artist_files.create!(
+      image_url: Faker::LoremFlickr.image,
+      resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
+      goals: Faker::TvShows::Friends.quote,
+      action_steps: Faker::Quote.famous_last_words
+    )
+    
     visit root_path
     fill_in "email", with: @artist1.email
     fill_in "password", with: @artist1.password

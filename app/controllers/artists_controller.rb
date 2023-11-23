@@ -1,14 +1,21 @@
 class ArtistsController < ApplicationController
-  def index; end
+def index; end
 
-  def show
+def show
     @artist = Artist.find_by(id: params[:id])
-
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    
     if @artist.nil?
       flash[:warning] = "Artist not found"
       redirect_to root_path
     else
       @artist_files = ArtistFile.where(artist_id: params[:id])
+    end
+
+    if !@artist_files&.first.nil?
+      @parsed_resources = JSON.parse(@artist_files.first.resources)
+    else
+      []
     end
   end
 

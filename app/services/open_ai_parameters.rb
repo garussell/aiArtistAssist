@@ -17,11 +17,12 @@ module OpenAiParameters
         },
         {
           "role": "user",
-          "content": "I'm an artist specializing in #{style} and want to get better at my craft. I'm looking for resources to help me with my goals."
+          "content": "I'm an artist specializing in #{style} and I'm seeking guidance to enhance my skills. Can you suggest three specific action steps I should take to improve my craft?"
         },
         {
           "role": "assistant",
-          "content": "Help the artist with their problem by providing 3 concise suggestions for next 3 action steps towards reaching their goal."
+          "content": "Provide detailed and actionable advice to help the artist progress in their artistic journey."
+          # "Provide creative and motivating suggestions to assist the artist in their pursuit of artistic excellence."
         }
       ],
         "temperature": 1,
@@ -44,7 +45,7 @@ module OpenAiParameters
         },
         {
           "role": "assistant",
-          "content": "Provide 3 resources with links to articles, videos, or other resources that will help the artist reach their goal."
+          "content": "Provide 3 resources with links to articles, videos, or other materials that will help the artist reach their goal."
         }
       ]
     }
