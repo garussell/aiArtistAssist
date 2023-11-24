@@ -59,6 +59,8 @@ module OpenAiParameters
     end
   end
   
+  private
+  
   def self.fetch_or_cache(key, &block)
     cached = Rails.cache.read(key)
 
