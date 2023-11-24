@@ -55,4 +55,16 @@ RSpec.describe "PostArtistPrompts", type: :request do
       expect(results).to eq("You must share your goal for this to work.")
     end
   end
+
+  describe "cache", :vcr do
+    it "caches the response for artist prompt" do
+      AiService.artist_prompt("I'm writing a song about facing my fears", "gothic")
+  
+      expect(Rails.cache.read("artist_prompt_I'm writing a song about facing my fears_gothic")).to_not be_nil
+  
+      AiService.artist_prompt("I'm writing a song about facing my fears", "gothic")
+  
+      expect(Rails.cache.read("artist_prompt_I'm writing a song about facing my fears_gothic")[:messages]).to_not be_nil
+    end
+  end  
 end
