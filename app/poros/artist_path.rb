@@ -11,6 +11,5 @@ class ArtistPath
 
   def format_resources(resources)
     resources_array = resources.split("\n\n").map { |item| item.sub(/^\d+\.\s+/, '') }
-    # extract_weblink = resources_array.map { |resource| resource.match(/\(([^)]+)\)/)&.captures&.first }
   end
 end
