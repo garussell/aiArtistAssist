@@ -21,8 +21,7 @@ module OpenAiParameters
         },
         {
           "role": "assistant",
-          "content": "Provide detailed and actionable advice to help the artist progress in their artistic journey."
-          # "Provide creative and motivating suggestions to assist the artist in their pursuit of artistic excellence."
+          "content": "Provide creative and imaginative advice to help the artist progress in their artistic journey."
         }
       ],
         "temperature": 1,

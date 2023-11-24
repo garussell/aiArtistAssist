@@ -27,6 +27,7 @@
     <%= form_for [@artist, ArtistFile.new] do |f| %>
       <div>
         <h3>What can you tell me about your next creative project?</h3>
+
         <%= f.label :goals %>
         <%= f.text_area :goals %>
       </div>
@@ -42,9 +43,10 @@
         <h2>Collection of Ideas</h2><br />
         <% @artist_files.reverse_each do |artist_file| %>
             <div><%= image_tag artist_file.image_url, alt: "file-image" %></div><br />
-            <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
-            <div><strong>Goals:</strong> <%= artist_file.goals %></div>
-            <div><strong>Action Steps:</strong> <%= artist_file.action_steps %></div>
+            <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div><br />
+            <div><strong>Goals:</strong> <%= artist_file.goals %></div><br />
+            <div><strong>Action Steps:</strong> <p><%= @markdown.render(artist_file.action_steps).html_safe %></p></div>
+            <br />
             <div>
             <% if artist_file.resources.present? %>
               <div>

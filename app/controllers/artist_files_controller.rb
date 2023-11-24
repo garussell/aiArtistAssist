@@ -11,7 +11,8 @@ class ArtistFilesController < ApplicationController
 
   def create
     artist = Artist.find(params[:artist_id])
-    prompt_response = AiFacade.new(artist_file_params[:goals]).prompt_response
+    style = artist.style
+    prompt_response = AiFacade.new(artist_file_params[:goals], style).prompt_response
 
     if prompt_response.present? && artist_file_params[:goals].present?
       artist_file = ArtistFile.create!(

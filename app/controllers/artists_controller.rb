@@ -4,7 +4,7 @@ def index; end
 def show
     @artist = Artist.find_by(id: params[:id])
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    
+
     if @artist.nil?
       flash[:warning] = "Artist not found"
       redirect_to root_path
