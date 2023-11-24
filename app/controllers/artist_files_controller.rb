@@ -4,7 +4,12 @@ class ArtistFilesController < ApplicationController
   def create
     artist = Artist.find(params[:artist_id])
     style = artist.style
-    prompt_response = AiFacade.new(artist_file_params[:goals], style).prompt_response
+
+    cache_key = "#{params[:artist_file][:goals]}-#{style}"
+    
+    prompt_response = fetch_or_cache(cache_key) do 
+      AiFacade.new(artist_file_params[:goals], style).prompt_response
+    end
 
     if prompt_response.present? && artist_file_params[:goals].present?
       artist_file = ArtistFile.create!(
@@ -39,5 +44,17 @@ class ArtistFilesController < ApplicationController
 
   def artist_file_params
     params.require(:artist_file).permit(:goals)
+  end
+
+  def fetch_or_cache(key, &block)
+    cached = Rails.cache.read(key)
+
+    if cached.present?
+      cached
+    else
+      data = yield
+      Rails.cache.write(key, data, expires_in: 1.day)
+      data
+    end
   end
 end
