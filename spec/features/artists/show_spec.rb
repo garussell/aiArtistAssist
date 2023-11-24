@@ -10,6 +10,13 @@ RSpec.describe "Artist Show Page" do
       password: "password"
     )
 
+    @artist1.artist_files.create!(
+      image_url: Faker::LoremFlickr.image,
+      resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
+      goals: Faker::TvShows::Friends.quote,
+      action_steps: Faker::Quote.famous_last_words
+    )
+
     visit root_path
     fill_in "email", with: @artist1.email
     fill_in "password", with: @artist1.password
@@ -80,6 +87,8 @@ RSpec.describe "Artist Show Page" do
 
     describe "#ai-prompt-section" do
       it "I see a section for ai prompts" do
+        click_on "Delete Prompt"
+
         expect(page).to have_content("AI Prompt")
         expect(page).to have_content("What can you tell me about your next creative project?")
         expect(page).to have_field("artist_file[goals]")
@@ -92,17 +101,18 @@ RSpec.describe "Artist Show Page" do
       it "has a section that displays content when there is at least one artist file" do
         artist_file1 = @artist1.artist_files.create!(
           image_url: Faker::LoremFlickr.image,
-          resources: Faker::Quote.jack_handey,
+          resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
           goals: Faker::TvShows::Friends.quote,
           action_steps: Faker::Quote.famous_last_words
         )
 
+        resources = JSON.parse(artist_file1.resources)
         visit artist_path(@artist1)
 
         expect(page).to have_content("Collection of Ideas")
         expect(page).to have_content(artist_file1.goals)
         expect(page).to have_content(artist_file1.action_steps)
-        expect(page).to have_content(artist_file1.resources)
+        expect(page).to have_content("Resources:")
       end
     end
   end

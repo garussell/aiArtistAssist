@@ -19,7 +19,9 @@ RSpec.describe "PostArtistPrompts", type: :request do
       expect(results[:action_steps]).to be_a(String)
 
       expect(results).to have_key(:resources)
-      expect(results[:resources]).to be_a(String)
+      expect(results[:resources]).to be_a(Array)
+
+      expect(results[:resources][0]).to be_a(String)
 
       expect(results).to have_key(:goals)
       expect(results[:goals]).to be_a(String)

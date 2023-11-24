@@ -13,10 +13,10 @@
   3.times do
     artist.artist_files.create!(
       image_url: Faker::LoremFlickr.image,
-        resources: Faker::Quote.jack_handey,
-        goals: Faker::TvShows::Friends.quote,
-        action_steps: Faker::Quote.famous_last_words
-      )
+      resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
+      goals: Faker::TvShows::Friends.quote,
+      action_steps: Faker::Quote.famous_last_words
+    )
   end
 
   puts "3 artist files created for artist #{artist.id}"

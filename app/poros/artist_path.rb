@@ -5,7 +5,11 @@ class ArtistPath
     @id = nil
     @goals = goals
     @action_steps = prompt[:content]
-    @resources = prompt[:resources]
+    @resources = format_resources(prompt[:resources])
     @image_url = image[:image_url]
+  end
+
+  def format_resources(resources)
+    resources_array = resources.split("\n\n").map { |item| item.sub(/^\d+\.\s+/, '') }
   end
 end

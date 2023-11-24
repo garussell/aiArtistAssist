@@ -1,17 +1,10 @@
 class ArtistFilesController < ApplicationController
   before_action :set_artist
 
-  def index
-    @artist_files = @artist.artist_files
-  end
-
-  def new
-    @artist_file = @artist.artist_files.build
-  end
-
   def create
     artist = Artist.find(params[:artist_id])
-    prompt_response = AiFacade.new(artist_file_params[:goals]).prompt_response
+    style = artist.style
+    prompt_response = AiFacade.new(artist_file_params[:goals], style).prompt_response
 
     if prompt_response.present? && artist_file_params[:goals].present?
       artist_file = ArtistFile.create!(
@@ -28,17 +21,11 @@ class ArtistFilesController < ApplicationController
     end
   end
 
-  def show
-    @artist_files = @artist.artist_files.all
-  end
-
   def destroy
     @artist_file = @artist.artist_files.find(params[:id])
 
     if @artist_file.destroy
       flash[:success] = "File deleted successfully."
-    else
-      flash[:warning] = @artist_file.errors.full_messages.join(", ")
     end
 
       redirect_to artist_path(@artist)
