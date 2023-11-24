@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   end
 
   # Login/Logout
-  # get "/artists/login", to: "artists#login"
   post "/sessions/login", to: "sessions#login"
   get "/sessions/logout", to: "sessions#logout"
 
