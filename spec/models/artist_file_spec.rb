@@ -10,5 +10,6 @@ RSpec.describe ArtistFile, type: :model do
 
   describe 'relationships' do
     it { should belong_to(:artist) }
+    it { should have_many(:stored_images) }
   end
 end
