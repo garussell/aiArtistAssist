@@ -5,7 +5,7 @@ class Api::V1::ArtistPromptsController < ApplicationController
       style = artist.style
     
       prompt_response = AiFacade.new(artist_params[:goals], style).prompt_response
-
+    
       if prompt_response.present? && artist_params[:goals].present?
         artist_file = ArtistFile.create!(
           artist_id: artist.id,

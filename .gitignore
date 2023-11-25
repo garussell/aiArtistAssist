@@ -31,5 +31,3 @@
 /config/master.key
 /coverage/*
 /spec/fixtures
-
-/dump.rdb
