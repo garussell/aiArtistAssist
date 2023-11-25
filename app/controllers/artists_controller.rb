@@ -11,12 +11,6 @@ def show
     else
       @artist_files = ArtistFile.where(artist_id: params[:id])
     end
-
-    if !@artist_files&.first.nil?
-      @parsed_resources = JSON.parse(@artist_files.first.resources)
-    else
-      []
-    end
   end
 
   def new

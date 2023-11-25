@@ -56,8 +56,9 @@
                 <div>
                     <% if artist_file.resources.present? %>
                     <div>
-                        <strong>Resources:</strong><% @parsed_resources.each do |resource| %>
-                        <p><%= @markdown.render(resource).html_safe %></p>
+                        <% parsed_resources = JSON.parse(artist_file.resources) %>
+                        <strong>Resources:</strong><% parsed_resources.each do |resource| %>
+                            <p><%= @markdown.render(resource).html_safe %></p>
                         <% end %>
                     </div>
                     <% end %>

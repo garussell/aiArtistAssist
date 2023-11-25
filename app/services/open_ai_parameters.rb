@@ -44,7 +44,7 @@ module OpenAiParameters
         },
         {
           "role": "assistant",
-          "content": "Provide 3 resources with links to articles, videos, or other materials that will help the artist reach their goal."
+          "content": "Provide 3 resources with links (in markdown format) to articles, videos, or other materials that will help the artist reach their goal."
         }
       ]
     }
