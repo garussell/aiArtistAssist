@@ -3,7 +3,7 @@ module OpenAiParameters
     {
       "prompt": "Produce a visually stunning artwork with a poetic reference to '#{style}'. Infuse the creation with the essence of the artist's goals: '#{content}'. Explore unique and imaginative elements to make the artwork truly exceptional.",
       "n": 1, # number of images to generate
-      "size": "1024x1024", # size of image to generate
+      "size": "800x800", # size of image to generate
     }
   end
 
@@ -13,11 +13,7 @@ module OpenAiParameters
       "messages": [
         {
           "role": "user",
-          "content": "#{content}"
-        },
-        {
-          "role": "user",
-          "content": "I'm an artist specializing in #{style} and I'm seeking guidance to enhance my skills. Can you suggest three specific action steps I should take to improve my craft?"
+          "content": "As an artist specializing in #{style}, I'm eager to elevate my skills and creativity. With a focus on my current goals—#{content}, I'm reaching out for guidance. Could you recommend three specific action steps I should take to further enhance my craft?"
         },
         {
           "role": "assistant",
