@@ -9,8 +9,7 @@ def show
       flash[:warning] = "Artist not found"
       redirect_to root_path
     else
-      @artist_file = ArtistFile.find_by(artist_id: params[:artist_file_id])
-      @artist_files = ArtistFile.where(artist_id: params[:id])
+      @artist_files = @artist.artist_files
     end
   end
 
