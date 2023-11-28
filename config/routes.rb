@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Artist Resources
   resources :artists do
-    resources :artist_files, only: [:create, :destroy]
+    resources :artist_files
   end
 
   # Login/Logout

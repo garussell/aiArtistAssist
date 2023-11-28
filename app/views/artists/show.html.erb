@@ -42,7 +42,7 @@
                 <h2>Collection of Ideas</h2>
                 <br />
                 <% @artist_files.reverse_each do |artist_file| %>
-                <div><%= image_tag artist_file.image_url, alt: "file-image" %></div>
+                <div><%= render 'shared/save_image', locals: { artist_file: artist_file } %></div>
                 <br />
                 <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
                 <br />

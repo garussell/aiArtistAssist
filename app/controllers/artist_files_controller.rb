@@ -1,6 +1,10 @@
 class ArtistFilesController < ApplicationController
   before_action :set_artist
 
+  def show
+    @artist_file = @artist.artist_files.find(params[:id])
+  end
+
   def create
     artist = Artist.find(params[:artist_id])
     style = artist.style
@@ -21,6 +25,19 @@ class ArtistFilesController < ApplicationController
     end
   end
 
+  # def edit; end
+
+  def update
+    @artist_file = @artist.artist_files.find(params[:id])
+
+    if @artist_file.update(saved_image: artist_file_params[:saved_image])
+      flash[:success] = "File updated successfully."
+    else
+      flash[:error] = "Something went wrong."
+    end
+      redirect_to artist_path(@artist)
+  end
+
   def destroy
     @artist_file = @artist.artist_files.find(params[:id])
 
@@ -38,6 +55,6 @@ class ArtistFilesController < ApplicationController
   end
 
   def artist_file_params
-    params.require(:artist_file).permit(:goals)
+    params.require(:artist_file).permit(:goals, :saved_image)
   end
 end
