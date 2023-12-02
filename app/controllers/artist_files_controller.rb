@@ -29,6 +29,15 @@ class ArtistFilesController < ApplicationController
 
   def update
     @artist_file = @artist.artist_files.find(params[:id])
+    if params[:fetch_new_image]
+      new_image_url = AiFacade.new(@artist_file.goals, @artist.style).get_image
+
+      @artist_file.saved_image.purge if @artist_file.saved_image.attached?
+      @artist_file.update(image_url: new_image_url[:image_url])
+      
+      redirect_to artist_path(@artist)
+      return
+    end
 
     if @artist_file.update(saved_image: artist_file_params[:saved_image])
       flash[:success] = "File updated successfully."
@@ -46,6 +55,12 @@ class ArtistFilesController < ApplicationController
     end
 
       redirect_to artist_path(@artist)
+  end
+
+  def fetch_new_image
+    @artist_file = @artist.artist_files.find(params[:id])
+    AiFacade.new(@artist_file.goals, @artist.style).get_image
+    require 'pry';binding.pry
   end
 
   private

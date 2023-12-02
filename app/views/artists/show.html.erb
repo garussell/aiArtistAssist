@@ -49,6 +49,8 @@
                         <%= link_to 'Download Temp Image', artist_file.image_url, download: 'temp_image.png', class: 'btn btn-primary' %>
                     <% end %>
 
+                    <%= link_to 'Fetch New Photo', artist_artist_file_path(@artist, artist_file, fetch_new_image: true), method: :patch %>
+
                     <h3>Upload Image</h3>
                     <%= form_with(model: [@artist, artist_file], local: true) do |form| %>
                         <%= form.file_field :saved_image %>
