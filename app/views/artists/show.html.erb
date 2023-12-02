@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="artist-info">
-            <h1>Hello <%= @artist.name %></h1>
+            <h1>You Are <%= @artist.name %></h1>
             <div><strong>Style:</strong> <%= @artist.style %></div>
             <div><strong>Bio:</strong> <%= @artist.bio %></div>
             <br />
@@ -42,7 +42,20 @@
                 <h2>Collection of Ideas</h2>
                 <br />
                 <% @artist_files.reverse_each do |artist_file| %>
-                <div><%= image_tag artist_file.image_url, alt: "file-image" %></div>
+                    <% if artist_file.saved_image.attached? %>
+                        <div class="image-container"><%= image_tag artist_file.saved_image %></div>
+                    <% else %>
+                        <div class="image-container"><%= image_tag artist_file.image_url %></div>
+                        <%= link_to 'Download Temp Image', artist_file.image_url, download: 'temp_image.png', class: 'btn btn-primary' %>
+                    <% end %>
+
+                    <%= link_to 'Fetch New Photo', artist_artist_file_path(@artist, artist_file, fetch_new_image: true), method: :patch %>
+
+                    <h3>Upload Image</h3>
+                    <%= form_with(model: [@artist, artist_file], local: true) do |form| %>
+                        <%= form.file_field :saved_image %>
+                        <%= form.submit 'Upload Image' %>
+                    <% end %>
                 <br />
                 <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
                 <br />

@@ -49,10 +49,21 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+# Active Storage
+gem 'activestorage', '~> 7.0'
+gem 'active_storage_db'
+gem 'active_storage_validations'
 
+# API Client
 gem "faraday"
+
+# To render markdown
 gem "redcarpet"
+
+# Google Cloud Storage
+gem 'google-cloud-storage'
+gem 'mini_magick'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

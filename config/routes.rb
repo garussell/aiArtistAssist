@@ -3,11 +3,10 @@ Rails.application.routes.draw do
 
   # Artist Resources
   resources :artists do
-    resources :artist_files, only: [:create, :destroy]
+    resources :artist_files
   end
 
   # Login/Logout
-  # get "/artists/login", to: "artists#login"
   post "/sessions/login", to: "sessions#login"
   get "/sessions/logout", to: "sessions#logout"
 

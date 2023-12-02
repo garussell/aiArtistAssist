@@ -25,12 +25,14 @@ module ArtistAssist
 
     # Configuration for the application, engines, and railties goes here.
     #
+    config.active_storage.service = :local
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.session_store :redis_store, servers: "redis://localhost:6379/1/session"
+    # config.session_store :redis_store, servers: "redis://localhost:6379/1/session"
 
     # Don't generate system test files.
     config.generators.system_tests = nil
