@@ -23,6 +23,12 @@
                 <h2>AI Prompt</h2>
                 <%= form_for [@artist, ArtistFile.new] do |f| %>
                 <div>
+                    <h3>What is the best word to describe your idea?</h3>
+                    <%= f.fields_for @artist do |artist_form| %>
+                        <%= artist_form.text_field :style %>
+                    <% end %>
+                </div>
+                <div>
                     <h3>What can you tell me about your next creative project?</h3>
                     <%= f.text_area :goals %>
                 </div>
@@ -51,15 +57,18 @@
 
                         <%= button_to 'New AI Photo', artist_artist_file_path(@artist, artist_file), method: :patch, params: { fetch_new_image: true }, class: 'btn new-ai-photo-btn' %>
 
-                        <h3>Upload Image</h3>
-                        <%= form_with(model: [@artist, artist_file], local: true, data: { turbo: false }) do |form| %>
-                            <%= form.file_field :saved_image %>
-                            <%= form.submit 'Upload Image' %>
-                        <% end %>
-
+                        <div id="upload-image">
+                            <% unless @artist_files.count > 3 %>
+                                <h3>Upload Image</h3>
+                                <%= form_with(model: [@artist, artist_file], local: true, data: { turbo: false }) do |form| %>
+                                    <%= form.file_field :saved_image %>
+                                    <%= form.submit 'Upload Image' %>
+                                <% end %>
+                            <% end %>
+                        </div>
                         <br />
                             <div class="card-body">
-                            <% if @artist_files.count < 3 %>
+                            <% if @artist_files.count <= 3 %>
                                 <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
                                 <br />
                                 <div><strong>Goals:</strong> <%= artist_file.goals %></div>
@@ -78,11 +87,16 @@
                                     <% end %>
                                     </div>
                                 <% end %>
+                                    <%= link_to 'Details', artist_artist_file_path(@artist, artist_file), class: 'btn btn-primary' %><br /><br />
+                                    <%= button_to "Delete", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-primary' %><br />
                                 </div>
                                 <br />
                                 <% else %>
+                                    <% parsed_resources = JSON.parse(artist_file.resources) %>
+                                    <% parsed_resources.each do |resource| %>
+                                        <%= @markdown.render(resource.scan(/\[(.*?)\]\((.*?)\)/).map { |text, url| "[#{text}](#{url})" }.join("\n")).html_safe %>
+                                    <% end %>
                                     <%= link_to 'Details', artist_artist_file_path(@artist, artist_file), class: 'btn btn-primary' %><br /><br />
-                                    <%= button_to "Delete", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
                                 <% end %>
                                 <br />
                                 <br />
