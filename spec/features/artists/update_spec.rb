@@ -25,7 +25,7 @@ RSpec.describe 'Artist Update Page' do
   end
 
   describe "As a visitor" do
-    describe "When I visit an artist's edit page" do
+    describe "When I visit an artist's edit page", js: true do
       it "I see a form to edit the artist's info" do
         expect(page).to have_content("Update Info")
         expect(page).to have_field('artist[name]')
@@ -52,8 +52,6 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: "I like to paint happy little trees"
-        # fill_in "artist[password]", with: @artist1.password
-        # fill_in "artist[password_confirmation]", with: @artist1.password
         
         click_on "Update Profile"
 
@@ -67,8 +65,11 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: ""
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: @artist1.bio
-        # fill_in "artist[password]", with: @artist1.password
-        # fill_in "artist[password_confirmation]", with: @artist1.password
+
+        check "Update Password" # wait for javascript to load via selenium
+
+        fill_in "artist[password]", with: @artist1.password
+        fill_in "artist[password_confirmation]", with: @artist1.password
 
         click_on "Update Profile"
 
@@ -81,8 +82,11 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: ""
         fill_in "artist[bio]", with: @artist1.bio
-        # fill_in "artist[password]", with: @artist1.password
-        # fill_in "artist[password_confirmation]", with: @artist1.password
+
+        check "Update Password" # wait for javascript to load via selenium
+
+        fill_in "artist[password]", with: @artist1.password
+        fill_in "artist[password_confirmation]", with: @artist1.password
 
         click_on "Update Profile"
 
@@ -95,8 +99,11 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: ""
-        # fill_in "artist[password]", with: @artist1.password
-        # fill_in "artist[password_confirmation]", with: @artist1.password
+
+        check "Update Password" # wait for javascript to load via selenium
+
+        fill_in "artist[password]", with: @artist1.password
+        fill_in "artist[password_confirmation]", with: @artist1.password
 
         click_on "Update Profile"
 
@@ -104,11 +111,14 @@ RSpec.describe 'Artist Update Page' do
         expect(page).to have_content("Bio can't be blank")
       end
 
-      xit "SAD PATH: When I fill in the form with invalid password, I am redirected to the edit artist page and see a flash message" do
+      it "SAD PATH: When I fill in the form with invalid password, I am redirected to the edit artist page and see a flash message" do
         fill_in "artist[name]", with: @artist1.name
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: @artist1.bio
+
+        check "Update Password" # wait for javascript to load via selenium
+
         fill_in "artist[password]", with: ""
         fill_in "artist[password_confirmation]", with: @artist1.password
 
@@ -118,11 +128,14 @@ RSpec.describe 'Artist Update Page' do
         expect(page).to have_content("Passwords do not match")
       end
 
-      xit "SAD PATH: When I fill in the form with invalid password confirmation, I am redirected to the edit artist page and see a flash message" do
+      it "SAD PATH: When I fill in the form with invalid password confirmation, I am redirected to the edit artist page and see a flash message" do
         fill_in "artist[name]", with: @artist1.name
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: @artist1.bio
+
+        check "Update Password" # wait for javascript to load via selenium
+
         fill_in "artist[password]", with: @artist1.password
         fill_in "artist[password_confirmation]", with: "wrongpassword"
 
@@ -133,6 +146,7 @@ RSpec.describe 'Artist Update Page' do
         expect(page).to have_content("Passwords do not match")
       end
     end
+
 
     describe "user must be logged in to edit their profile" do
       it "If I am not logged in, I am redirected to the root path and see a flash message" do
