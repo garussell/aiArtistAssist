@@ -85,15 +85,13 @@ RSpec.describe "Artist Show Page" do
 
     describe "#ai-prompt-section" do
       it "I see a section for ai prompts" do
-        click_on "Delete Prompt"
-
         expect(page).to have_content("AI Prompt")
         expect(page).to have_content("What can you tell me about your next creative project?")
         expect(page).to have_field("artist_file[goals]")
 
         expect(page).to have_button("Get Prompt")
-        
-        expect(page).to_not have_content("Collection of Ideas")
+
+        expect(page).to have_content("Collection of Ideas")
       end
 
       it "has a section that displays content when there is at least one artist file" do
@@ -111,6 +109,16 @@ RSpec.describe "Artist Show Page" do
         expect(page).to have_content(artist_file1.goals)
         expect(page).to have_content(artist_file1.action_steps)
         expect(page).to have_content("Resources:")
+      end
+
+      it "promt can be deleted" do
+        visit artist_artist_file_path(@artist1, @artist1.artist_files.first)
+
+        expect(page).to have_button("Delete")
+        click_on "Delete"
+
+        expect(page).to have_content("File deleted successfully")
+        expect(current_path).to eq(artist_path(@artist1))
       end
     end
   end

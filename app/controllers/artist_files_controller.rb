@@ -1,6 +1,10 @@
 class ArtistFilesController < ApplicationController
   before_action :set_artist
 
+  def show
+    @artist_file = @artist.artist_files.find(params[:id])
+  end
+
   def create
     artist = Artist.find(params[:artist_id])
     style = artist.style

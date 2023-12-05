@@ -59,6 +59,7 @@
 
                         <br />
                             <div class="card-body">
+                            <% if @artist_files.count < 3 %>
                                 <div><strong>Created:</strong> <%= artist_file.created_at.strftime("%B %d, %Y") %></div>
                                 <br />
                                 <div><strong>Goals:</strong> <%= artist_file.goals %></div>
@@ -79,9 +80,10 @@
                                 <% end %>
                                 </div>
                                 <br />
-                                <div>
-                                <%= button_to "Delete Prompt", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
-                                </div>
+                                <% else %>
+                                    <%= link_to 'Details', artist_artist_file_path(@artist, artist_file), class: 'btn btn-primary' %><br /><br />
+                                    <%= button_to "Delete", artist_artist_file_path(@artist, artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+                                <% end %>
                                 <br />
                                 <br />
                             </div>
