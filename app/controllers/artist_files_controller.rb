@@ -1,6 +1,10 @@
 class ArtistFilesController < ApplicationController
   before_action :set_artist
 
+  def show
+    @artist_file = @artist.artist_files.find(params[:id])
+  end
+
   def create
     artist = Artist.find(params[:artist_id])
     style = artist.style
@@ -23,6 +27,7 @@ class ArtistFilesController < ApplicationController
 
   def update
     @artist_file = @artist.artist_files.find(params[:id])
+  
     if params[:fetch_new_image]
       new_image_url = AiFacade.new(@artist_file.goals, @artist.style).get_image
 
@@ -53,6 +58,7 @@ class ArtistFilesController < ApplicationController
 
   def set_artist
     @artist = Artist.find(params[:artist_id])
+    @artist_files = @artist.artist_files
   end
 
   def artist_file_params
