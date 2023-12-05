@@ -27,7 +27,6 @@
             <%= form_for [@artist, ArtistFile.new] do |f| %>
             <div>
                 <h3>What can you tell me about your next creative project?</h3>
-
                 <%= f.label :goals %> <%= f.text_area :goals %>
             </div>
             <br />
@@ -46,10 +45,10 @@
                         <div class="image-container"><%= image_tag artist_file.saved_image %></div>
                     <% else %>
                         <div class="image-container"><%= image_tag artist_file.image_url %></div>
-                        <%= link_to 'Download Temp Image', artist_file.image_url, download: 'temp_image.png', class: 'btn btn-primary' %>
+                        <%= link_to 'Download', artist_file.image_url, download: 'temp_image.png', class: 'btn btn-primary' %><br /><br />
                     <% end %>
 
-                    <%= link_to 'Fetch New Photo', artist_artist_file_path(@artist, artist_file, fetch_new_image: true), method: :patch %>
+                    <%= link_to 'New AI Photo', artist_artist_file_path(@artist, artist_file, fetch_new_image: true), method: :patch %>
 
                     <h3>Upload Image</h3>
                     <%= form_with(model: [@artist, artist_file], local: true) do |form| %>
