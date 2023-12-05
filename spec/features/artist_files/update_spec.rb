@@ -49,8 +49,6 @@ RSpec.describe "Update Artist File", type: :feature do
       end
 
       it "has upload image button" do 
-        fill_in with: "I want to be a better artist"
-        
         # Attach an image to simulate the upload
         saved_image_file1 = Rails.root.join('spec', 'fixtures', 'files', 'image1.jpg')
         attach_file("artist_file[saved_image]", saved_image_file1)
