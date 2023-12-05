@@ -38,11 +38,16 @@ RSpec.describe 'Artist Update Page' do
       end
 
       it "I see a toggle for update password" do
-        expect(page).not_to have_field("artist_current_password")
+        expect(page).to have_field("artist_current_password")
         expect(page).not_to have_field("artist_password")
         expect(page).not_to have_field("artist_password_confirmation")
         expect(page).to have_content("Update Password")
-       
+      
+        check "Update Password"
+
+        expect(page).to have_field("artist_password")
+        expect(page).to have_field("artist_password_confirmation")
+        expect(page).to have_content("Update Password")
       end
 
       it "When I fill in the form with valid information and click submit, I am redirected to my dashboard" do
@@ -52,7 +57,8 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: "I like to paint happy little trees"
-        
+        fill_in "artist_current_password", with: "password"
+   
         click_on "Update Profile"
 
         expect(current_path).to eq(artist_path(@artist1.id))
@@ -65,6 +71,7 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: ""
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: @artist1.bio
+        fill_in "artist_current_password", with: "password"
 
         check "Update Password" # wait for javascript to load via selenium
 
@@ -82,6 +89,7 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: ""
         fill_in "artist[bio]", with: @artist1.bio
+        fill_in "artist_current_password", with: "password"
 
         check "Update Password" # wait for javascript to load via selenium
 
@@ -99,6 +107,7 @@ RSpec.describe 'Artist Update Page' do
         fill_in "artist[email]", with: @artist1.email
         fill_in "artist[style]", with: @artist1.style
         fill_in "artist[bio]", with: ""
+        fill_in "artist_current_password", with: "password"
 
         check "Update Password" # wait for javascript to load via selenium
 
