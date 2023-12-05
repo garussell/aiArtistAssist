@@ -13,3 +13,53 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* Add other regular mode styles */
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #222; /* Dark background color */
+  color: #fff; /* Light text color */
+  /* Add other dark mode styles */
+}
+
+/* Password toggle in edit.html.erb */
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/* Card styles */
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #524e4e;
+  border: 1px solid #000;
+  border-radius: 9px;
+}
+
+.btn:hover {
+  background-color: #34b492;
+}

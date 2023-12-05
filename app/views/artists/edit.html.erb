@@ -36,20 +36,5 @@
   <br />
 <% end %>
 
-<style>
-  .hide {
-    display: none;
-  }
+<%= javascript_include_tag "updatePassword" %>
 
-  .show {
-    display: block;
-  }
-</style>
-
-<script>
-  document.getElementById('toggle-password').addEventListener('change', function() {
-    var passwordFields = document.getElementById('password-fields');
-    passwordFields.classList.toggle('hide', !this.checked);
-    passwordFields.classList.toggle('show', this.checked);
-  });
-</script>
