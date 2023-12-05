@@ -12,14 +12,14 @@
   <%= form.label :bio %>
   <%= form.text_area :bio, placeholder: "Bio" %>
   <br />
+  <%= form.label :current_password %>
+  <%= form.password_field :current_password, placeholder: "Enter your current password" %>
    <label>
     Update Password:
     <input type="checkbox" id="toggle-password" value="1">
   </label>
   <br />
-  <div id="password-fields" style="display: none;">
-    <%= form.label :current_password %>
-    <%= form.password_field :current_password, placeholder: "Enter your current password" %>
+  <div id="password-fields" class="hide">
     <br />
     <%= form.label :password %>
     <%= form.password_field :password, placeholder: "Enter new password" %>
@@ -36,10 +36,20 @@
   <br />
 <% end %>
 
+<style>
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+</style>
+
 <script>
-  // Toggle password fields
   document.getElementById('toggle-password').addEventListener('change', function() {
     var passwordFields = document.getElementById('password-fields');
-    passwordFields.style.display = this.checked ? 'block' : 'none';
+    passwordFields.classList.toggle('hide', !this.checked);
+    passwordFields.classList.toggle('show', this.checked);
   });
 </script>

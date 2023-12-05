@@ -1,10 +1,6 @@
 class ArtistFilesController < ApplicationController
   before_action :set_artist
 
-  def show
-    @artist_file = @artist.artist_files.find(params[:id])
-  end
-
   def create
     artist = Artist.find(params[:artist_id])
     style = artist.style
@@ -39,10 +35,8 @@ class ArtistFilesController < ApplicationController
 
     if @artist_file.update(saved_image: artist_file_params[:saved_image])
       flash[:success] = "File updated successfully."
-    else
-      flash[:error] = "Something went wrong."
-    end
       redirect_to artist_path(@artist)
+    end
   end
 
   def destroy
@@ -53,11 +47,6 @@ class ArtistFilesController < ApplicationController
     end
 
       redirect_to artist_path(@artist)
-  end
-
-  def fetch_new_image
-    @artist_file = @artist.artist_files.find(params[:id])
-    AiFacade.new(@artist_file.goals, @artist.style).get_image
   end
 
   private
