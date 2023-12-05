@@ -7,6 +7,7 @@ class ArtistFilesController < ApplicationController
   end
 
   def create
+    
     artist = Artist.find(params[:artist_id])
     if params[:style].present?
       style = params[:style]
