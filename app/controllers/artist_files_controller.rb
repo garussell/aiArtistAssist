@@ -25,8 +25,6 @@ class ArtistFilesController < ApplicationController
     end
   end
 
-  # def edit; end
-
   def update
     @artist_file = @artist.artist_files.find(params[:id])
     if params[:fetch_new_image]
@@ -60,7 +58,6 @@ class ArtistFilesController < ApplicationController
   def fetch_new_image
     @artist_file = @artist.artist_files.find(params[:id])
     AiFacade.new(@artist_file.goals, @artist.style).get_image
-    require 'pry';binding.pry
   end
 
   private
