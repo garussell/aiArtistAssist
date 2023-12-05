@@ -32,4 +32,4 @@
 /coverage/*
 /spec/fixtures
 
-/dump.rdb
+dump.rdb

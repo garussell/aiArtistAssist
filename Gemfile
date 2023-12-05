@@ -77,6 +77,7 @@ group :development, :test do
   gem "vcr"
   gem "faker"
   gem "launchy"
+  gem "selenium-webdriver"
 end
 
 group :development do
