@@ -46,11 +46,9 @@ RSpec.describe "Artist Show Page" do
         expect(page).to have_field('artist[email]')
         expect(page).to have_field('artist[style]')
         expect(page).to have_field('artist[bio]')
-        expect(page).to have_field('artist[password]')
 
         expect(page).to have_button("Update Profile")
         expect(page).to have_link("Cancel")
-     
       end
 
       it "I see a link to delete the artist" do

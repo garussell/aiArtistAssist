@@ -43,8 +43,11 @@ def show
 
   def update
     @artist = Artist.find_by(id: session[:artist_id])
-    
-    if @artist.update(artist_params) && password_match?(@artist) 
+
+    if params[:artist][:current_password].present? && !current_password_match?(@artist)
+      flash[:warning] = "Incorrect password"
+      redirect_to edit_artist_path(@artist)
+    elsif @artist.update(artist_params) && password_match?(@artist)
       flash[:success] = "Your profile has been updated"
       redirect_to artist_path(@artist)
     elsif !password_match?(@artist)
@@ -54,7 +57,7 @@ def show
       flash[:warning] = @artist.errors.full_messages.join(", ")
       redirect_to edit_artist_path(@artist)
     end
-  end
+  end  
 
   def destroy
     @artist = Artist.find_by(id: params[:id])
@@ -69,7 +72,7 @@ def show
   private
 
   def artist_params
-    params.require(:artist).permit(:name, :email, :style, :bio, :password)
+    params.require(:artist).permit(:name, :email, :style, :bio, :password, :password_confirmation)
   end
 
   def password_match?(artist)
@@ -79,4 +82,8 @@ def show
       false
     end
   end  
+
+  def current_password_match?(artist)
+    artist&.authenticate(params[:artist][:current_password]) 
+  end
 end
