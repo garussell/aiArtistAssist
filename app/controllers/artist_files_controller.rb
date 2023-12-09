@@ -3,16 +3,24 @@ class ArtistFilesController < ApplicationController
 
   def show
     @artist_file = @artist.artist_files.find(params[:id])
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   def create
     artist = Artist.find(params[:artist_id])
-    style = artist.style
+    
+    if params[:style].present?
+      style = params[:style]
+    else
+      style = artist.style
+    end
+
     prompt_response = AiFacade.new(artist_file_params[:goals], style).prompt_response
 
     if prompt_response.present? && artist_file_params[:goals].present?
       artist_file = ArtistFile.create!(
           artist_id: artist.id,
+          style: style,
           goals: artist_file_params[:goals],
           action_steps: prompt_response.action_steps,
           resources: prompt_response.resources,
@@ -27,12 +35,14 @@ class ArtistFilesController < ApplicationController
 
   def update
     @artist_file = @artist.artist_files.find(params[:id])
-  
+    style = @artist.style
+
     if params[:fetch_new_image]
-      new_image_url = AiFacade.new(@artist_file.goals, @artist.style).get_image
+      new_image_url = AiFacade.new(@artist_file.goals, style).get_image
 
       @artist_file.saved_image.purge if @artist_file.saved_image.attached?
       @artist_file.update(image_url: new_image_url[:image_url])
+      @artist_file.update_style(style)
       
       redirect_to artist_path(@artist)
       return
@@ -62,6 +72,6 @@ class ArtistFilesController < ApplicationController
   end
 
   def artist_file_params
-    params.require(:artist_file).permit(:goals, :saved_image)
+    params.require(:artist_file).permit(:goals, :saved_image, :style, :other_style, artist: [:style])
   end
 end
