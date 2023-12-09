@@ -1,7 +1,7 @@
 module OpenAiParameters
   def self.image_prompt(content, style)
     {
-      "prompt": "Produce a visually stunning artwork with a poetic reference to '#{style}'. Infuse the creation with the essence of the artist's goals: '#{content}'. Explore unique and imaginative elements to make the artwork truly exceptional.",
+      "prompt": "Produce a visually stunning artwork with a poetic reference to '#{style}'. Infuse the creation with the essence of the artist's statement: '#{content}'. Explore unique and imaginative elements to make the artwork truly exceptional.",
       "n": 1, # number of images to generate
       "size": "1024x1024", # size of image to generate
     }
@@ -13,7 +13,7 @@ module OpenAiParameters
       "messages": [
         {
           "role": "user",
-          "content": "As an artist specializing in #{style}, I'm eager to elevate my skills and creativity. With a focus on my current goals—#{content}, I'm reaching out for guidance. Could you recommend three specific action steps I should take to further enhance my craft?"
+          "content": "As an artist looking for ideas related to #{style}, I'm eager to elevate my skills and creativity. My focus is this: #{content}, I'm reaching out for guidance. Could you recommend three specific action steps I should take next?"
         },
         {
           "role": "assistant",
