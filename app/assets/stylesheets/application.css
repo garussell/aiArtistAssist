@@ -63,3 +63,10 @@ body.dark-mode {
 .btn:hover {
   background-color: #34b492;
 }
+
+.divider {
+  width: 100%;
+  border: 1px solid #ccc;
+  margin: 20px 0;
+}
+

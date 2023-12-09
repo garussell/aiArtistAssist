@@ -7,7 +7,6 @@ class ArtistFile < ApplicationRecord
 
   def update_style(new_style)
     artist.update(style: new_style)
-
     update(style: new_style)
   end
 end

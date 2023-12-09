@@ -1,12 +1,48 @@
-<nav>
-  <div class="nav navbar-nav">
-    <% unless current_page?(root_path) %>
-      <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
-    <% end %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <% if current_session %>
+      <% unless current_page?(artist_path(@artist)) %>
+        <% if @artist.avatar.attached? %>
+          <a class="navbar-brand" href="<%= artist_path(@artist) %>">
+            <img src="<%= url_for(@artist.avatar) %>" alt="avatar" width="30" height="30" class="d-inline-block align-text-top rounded-circle">
+            <%= "Hello " + @artist.name %>
+          </a>
+        <% else %> 
+          <a class="navbar-brand" href="<%= artist_path(@artist) %>">
+            <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="avatar" width="30" height="30" class="d-inline-block align-text-top rounded-circle">
+            <%= @artist.name %>
+          </a>
+        <% end %>
+      <% end %>
 
-    <% unless !session[:artist_id] %>
-      <p class="nav-item"><%= link_to 'Logout', sessions_logout_path, class: "nav-link" %></p>
+      <% unless current_page?(root_path) %>
+        <a class="navbar-brand italics">AI Powered Project Generator</a>
+      <% end %>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse" id="navbarNav">
+        <div class="navbar-nav d-flex align-items-center justify-content-between">
+          <div class="dark-mode-switch d-flex me-3">
+            <div class="form-check form-switch">
+              <input type="checkbox" class="form-check-input me-2" id="darkSwitch" />
+              <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+            </div>
+          </div>
+
+          <% unless current_page?(root_path) %>
+            <a class="nav-link <%= 'active' if current_page?(root_path) %>" href="<%= root_path %>">My Profile</a>
+          <% end %>
+        </div>
+
+        <% if session[:artist_id] %>
+          <a class="nav-link" href="<%= sessions_logout_path %>">Logout</a>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </nav>
-          
+<div class="divider"></div>

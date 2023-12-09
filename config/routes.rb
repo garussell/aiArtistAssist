@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # Artist Resources
   resources :artists do
     resources :artist_files
+
+    member do
+      patch 'upload_avatar'
+    end
   end
 
   # Login/Logout

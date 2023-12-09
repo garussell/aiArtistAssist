@@ -4,6 +4,8 @@ def index; end
 def show
     @artist = Artist.find_by(id: params[:id])
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @style_question = QuestionsModule.random_style_question
+    @goal_question = QuestionsModule.random_goal_question
 
     if @artist.nil?
       flash[:warning] = "Artist not found"
@@ -19,6 +21,7 @@ def show
 
   def create
     artist = Artist.new(artist_params)
+
     if password_match?(artist) && artist.save 
       flash[:success] = "Your profile has been created"
       session[:artist_id] = artist.id
@@ -56,6 +59,18 @@ def show
       redirect_to edit_artist_path(@artist)
     end
   end  
+
+  def upload_avatar
+    @artist = Artist.find_by(id: session[:artist_id])
+    @artist.avatar.attach(params[:artist][:avatar])
+    if @artist.save
+      flash[:success] = "Your avatar has been updated"
+    else
+      flash[:warning] = "Your avatar could not be updated"
+    end
+
+    redirect_to root_path
+  end
 
   def destroy
     @artist = Artist.find_by(id: params[:id])
