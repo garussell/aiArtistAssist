@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var toggleModeButton = document.getElementById("toggleModeButton");
+  var darkSwitch = document.getElementById("darkSwitch");
   var body = document.body;
 
-  toggleModeButton.addEventListener("click", function() {
+  darkSwitch.addEventListener("change", function() {
     // Toggle between dark and regular mode
-    body.classList.toggle("dark-mode");
+    body.classList.toggle("dark-mode", darkSwitch.checked);
   });
 });
