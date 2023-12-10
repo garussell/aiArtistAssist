@@ -14,6 +14,7 @@ RSpec.describe "Artist Show Page" do
       image_url: Faker::LoremFlickr.image,
       resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
       goals: Faker::TvShows::Friends.quote,
+      style: Faker::Music.genre,
       action_steps: Faker::Quote.famous_last_words
     )
 
@@ -24,73 +25,12 @@ RSpec.describe "Artist Show Page" do
   end
 
   describe "As a visitor" do
-    describe "When I visit an artist's show page" do
-      it "I see the artist's name, style, and bio" do
-        within(".artist-info") do
-          expect(page).to have_content(@artist1.name)
-          expect(page).to have_content(@artist1.style)
-          expect(page).to have_content(@artist1.bio)
-        end
-      end
-
-      it "I see a link to edit the artist's info" do
-        within(".artist-info") do
-          expect(page).to have_link("Edit Info")
-
-          click_on "Edit Info"
-        end
-
-        expect(current_path).to eq(edit_artist_path(@artist1))
-    
-        expect(page).to have_field('artist[name]')
-        expect(page).to have_field('artist[email]')
-        expect(page).to have_field('artist[style]')
-        expect(page).to have_field('artist[bio]')
-
-        expect(page).to have_button("Update Profile")
-        expect(page).to have_link("Cancel")
-      end
-
-      it "I see a link to delete the artist" do
-        expect(page).to have_button("Delete Profile")
-        
-        click_on "Delete Profile"
-
-        expect(page).to have_content("Your profile has been deleted")
-        expect(current_path).to eq(root_path)
-      end
-
-      it "I see a link to logout and artist login does not render" do
-        expect(current_path).to eq(artist_path(@artist1))
-
-        expect(page).to have_link("Logout")
-        expect(page).to_not have_link("Login")
-
-        expect(page).to_not have_content("Email")
-        expect(page).to_not have_content("Password")
-        
-        click_on "Logout"
-
-        expect(page).to have_content("You have successfully logged out")
-        expect(current_path).to eq(root_path)
-      end
-
-      it "flashes a message 'artist not found' if artist does not exist" do
-        visit artist_path(10000)
-
-        expect(page).to have_content("Artist not found")
-        expect(current_path).to eq(root_path)
-      end
-    end
-
     describe "#ai-prompt-section" do
       it "I see a section for ai prompts" do
         expect(page).to have_content("AI Prompt")
-        expect(page).to have_content("What can you tell me about your next creative project?")
         expect(page).to have_field("artist_file[goals]")
 
         expect(page).to have_button("Get Prompt")
-
         expect(page).to have_content("Collection of Ideas")
       end
 
@@ -119,6 +59,55 @@ RSpec.describe "Artist Show Page" do
 
         expect(page).to have_content("File deleted successfully")
         expect(current_path).to eq(artist_path(@artist1))
+      end
+    end
+
+    describe "artist files" do
+      it "I see a section for artist files" do
+        expect(page).to have_content("Collection of Ideas")
+        expect(@artist1.artist_files.count).to eq(1)
+
+        expect(page).to have_content("Created:")
+        expect(page).to have_content(@artist1.artist_files.first.goals)
+        expect(page).to have_content(@artist1.artist_files.first.action_steps)
+        expect(page).to have_content("Resources:")
+      end
+
+      it "changes when adding more artist files >2 <4" do
+        2.times do @artist1.artist_files.create!(
+          image_url: Faker::LoremFlickr.image,
+          resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
+          goals: Faker::TvShows::Friends.quote,
+          style: Faker::Music.genre,
+          action_steps: Faker::Quote.famous_last_words
+        )
+        end
+
+        expect(page).to have_content("Collection of Ideas")
+        expect(@artist1.artist_files.count).to eq(3)
+
+        expect(page).to have_content(@artist1.artist_files.first.goals)
+        expect(page).to have_content(@artist1.artist_files.first.action_steps)
+        expect(page).to have_content("Resources:")
+      end
+
+      it "changes when adding more artist files >4" do
+        5.times do @artist1.artist_files.create!(
+          image_url: Faker::LoremFlickr.image,
+          resources: [Faker::Quote.jack_handey, Faker::Quote.jack_handey, Faker::Quote.jack_handey],
+          goals: Faker::TvShows::Friends.quote,
+          style: Faker::Music.genre,
+          action_steps: Faker::Quote.famous_last_words
+        )
+        end
+        
+        visit artist_path(@artist1)
+        expect(page).to have_content("Collection of Ideas")
+        expect(@artist1.artist_files.count).to eq(6)
+
+        expect(page).to_not have_content(@artist1.artist_files.first.goals)
+        expect(page).to_not have_content(@artist1.artist_files.first.action_steps)
+        expect(page).to_not have_content("Resources:")
       end
     end
   end

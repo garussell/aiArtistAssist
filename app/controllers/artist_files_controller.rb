@@ -11,8 +11,6 @@ class ArtistFilesController < ApplicationController
    
     if params[:artist_file][:artist][:style].present?
       style = params[:artist_file][:artist][:style]
-    else
-      style = artist.style
     end
 
     prompt_response = AiFacade.new(artist_file_params[:goals], style).prompt_response

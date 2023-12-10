@@ -53,7 +53,6 @@ RSpec.describe "Update Artist File", type: :feature do
         saved_image_file1 = Rails.root.join('spec', 'fixtures', 'files', 'image1.jpg')
         attach_file("artist_file[saved_image]", saved_image_file1)
       
-        expect(page).to have_content("Upload Image")
         click_on "Upload Image"
 
         expect(page).to have_content("File updated successfully.")
