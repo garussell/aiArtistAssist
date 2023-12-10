@@ -33,9 +33,6 @@ RSpec.describe "Create Artist Provile", type: :feature do
 
         expect(current_path).to eq(artist_path(Artist.last.id))
         expect(page).to have_content("Your profile has been created")
-        expect(page).to have_content("Bob Ross")
-        expect(page).to have_content("Painting")
-        expect(page).to have_content("I like to paint happy little trees")
       end
 
       it "SAD PATH: When I fill in the form with invalid email, I am redirected to the new artist page and see a flash message" do

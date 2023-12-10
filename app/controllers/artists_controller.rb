@@ -6,13 +6,7 @@ def show
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @style_question = QuestionsModule.random_style_question
     @goal_question = QuestionsModule.random_goal_question
-
-    if @artist.nil?
-      flash[:warning] = "Artist not found"
-      redirect_to root_path
-    else
-      @artist_files = @artist.artist_files
-    end
+    @artist_files = @artist.artist_files
   end
 
   def new
@@ -65,8 +59,6 @@ def show
     @artist.avatar.attach(params[:artist][:avatar])
     if @artist.save
       flash[:success] = "Your avatar has been updated"
-    else
-      flash[:warning] = "Your avatar could not be updated"
     end
 
     redirect_to root_path

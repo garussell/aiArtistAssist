@@ -21,7 +21,8 @@ RSpec.describe 'Artist Update Page' do
     fill_in "password", with: @artist1.password
     click_button "Login"
 
-    click_on "Edit Info"
+    visit root_path
+    click_on "Edit Profile"
   end
 
   describe "As a visitor" do
