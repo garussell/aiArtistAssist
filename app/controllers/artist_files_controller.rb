@@ -8,9 +8,9 @@ class ArtistFilesController < ApplicationController
 
   def create
     artist = Artist.find(params[:artist_id])
-    
-    if params[:style].present?
-      style = params[:style]
+   
+    if params[:artist_file][:artist][:style].present?
+      style = params[:artist_file][:artist][:style]
     else
       style = artist.style
     end
@@ -35,14 +35,12 @@ class ArtistFilesController < ApplicationController
 
   def update
     @artist_file = @artist.artist_files.find(params[:id])
-    style = @artist.style
 
     if params[:fetch_new_image]
-      new_image_url = AiFacade.new(@artist_file.goals, style).get_image
+      new_image_url = AiFacade.new(@artist_file.goals, @artist_file.style).get_image
 
       @artist_file.saved_image.purge if @artist_file.saved_image.attached?
       @artist_file.update(image_url: new_image_url[:image_url])
-      @artist_file.update_style(style)
       
       redirect_to artist_path(@artist)
       return

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary custom-bg-opacity">
   <div class="container-fluid">
     <% if current_session %>
       <% unless current_page?(artist_path(@artist)) %>
@@ -19,12 +19,14 @@
         <a class="navbar-brand italics">AI Powered Project Generator</a>
       <% end %>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Toggler Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse" id="navbarNav">
+      <!-- Navbar Items -->
+      <div class="navbar-collapse collapse" id="navbarNav">
         <div class="navbar-nav d-flex align-items-center justify-content-between">
           <div class="dark-mode-switch d-flex me-3">
             <div class="form-check form-switch">
@@ -42,6 +44,27 @@
           <a class="nav-link" href="<%= sessions_logout_path %>">Logout</a>
         <% end %>
       </div>
+      <script>
+        const inactivityTimeout = 20 * 60 * 1000; // 20 minute timeout 
+        let timeout;
+
+        // Reset the timeout whenever there is user activity.
+        const resetTimeout = () => {
+          clearTimeout(timeout);
+          timeout = setTimeout(logout, inactivityTimeout);
+        };
+
+        // Listen for user activity events.
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+
+        // Log the user out after inactivity.
+        const logout = () => {
+          window.location.href = '/sessions/logout?timeout=true';
+        };
+
+        resetTimeout();
+      </script>
     <% end %>
   </div>
 </nav>

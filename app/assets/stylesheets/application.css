@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -28,6 +33,11 @@ body.dark-mode {
 
 body.dark-mode .card {
   background-color: rgb(62, 92, 100);
+  color: #fff;
+}
+
+body.dark-mode .container {
+  background-color: #3d3939;
   color: #fff;
 }
 
@@ -66,21 +76,6 @@ body.dark-mode #app-topper {
 .card img {
   max-width: 100%;
   height: auto;
-}
-
-.btn {
-  display: inline-block;
-  padding: 5px 5px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff;
-  background-color: #524e4e;
-  border: 1px solid #000;
-  border-radius: 9px;
-}
-
-.btn:hover {
-  background-color: #34b492;
 }
 
 .divider {
@@ -128,5 +123,6 @@ body.dark-mode #app-topper {
 .custom-bg-opacity {
   background-color: rgba(255, 255, 255, 0.2); /
 }
+
 
 

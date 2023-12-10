@@ -12,9 +12,11 @@
   </head>
 
   <body>
+    <% if current_session %>
         <div id="app-topper">
-          <%= render 'shared/navbar' %>
+            <%= render 'shared/navbar' %>
         </div>
+    <% end %>
         
         <% if flash.any? %> 
           <% flash.each do |type, msg| %>
