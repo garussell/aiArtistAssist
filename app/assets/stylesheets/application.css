@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -21,9 +26,28 @@ body {
 
 /* Dark mode styles */
 body.dark-mode {
-  background-color: #222; /* Dark background color */
-  color: #fff; /* Light text color */
+  background-color: #3d3939; /* Dark background color */
+  color: #060606; /* Light text color */
   /* Add other dark mode styles */
+}
+
+body.dark-mode .card {
+  background-color: rgb(62, 92, 100);
+  color: #fff;
+}
+
+body.dark-mode .container {
+  background-color: #3d3939;
+  color: #fff;
+}
+
+body.dark-mode .collection-of-prompts {
+  background-color:rgb(62, 92, 100);
+  color: #fff;
+}
+
+body.dark-mode #app-topper {
+  background-color: #3d3939;
 }
 
 /* Password toggle in edit.html.erb */
@@ -44,24 +68,14 @@ body.dark-mode {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.collection-of-prompts.dark-mode {
+  background-color: #222;
+  color: #fff;
+}
+
 .card img {
   max-width: 100%;
   height: auto;
-}
-
-.btn {
-  display: inline-block;
-  padding: 5px 5px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff;
-  background-color: #524e4e;
-  border: 1px solid #000;
-  border-radius: 9px;
-}
-
-.btn:hover {
-  background-color: #34b492;
 }
 
 .divider {
@@ -69,4 +83,46 @@ body.dark-mode {
   border: 1px solid #ccc;
   margin: 20px 0;
 }
+
+.artist-login {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  margin-left: 20px;
+}
+
+.login-header {
+  margin-bottom: 10px;
+}
+
+.login-header-italics {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  max-width: 300px;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.signup-link {
+  margin-top: 10px;
+}
+
+.custom-bg-opacity {
+  background-color: rgba(255, 255, 255, 0.2); /
+}
+
+
 

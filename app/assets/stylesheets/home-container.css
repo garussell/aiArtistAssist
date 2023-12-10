@@ -1,0 +1,28 @@
+#home-container {
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(45deg, #519797, #9c1162, #04b7db, #a9bcda);
+  background-size: 400% 400%; /* Increase size for smooth transition */
+  animation: gradientAnimation 10s infinite; /* Adjust duration as needed */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #3d3939;
+  color: white;
+  text-align: center;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,11 +1,12 @@
 module OpenAiParameters
   def self.image_prompt(content, style)
+    artist_list = artist_sample_list.sample(3).join(", ")
     {
-      "prompt": "Produce a visually stunning artwork with a poetic reference to '#{style}'. Infuse the creation with the essence of the artist's goals: '#{content}'. Explore unique and imaginative elements to make the artwork truly exceptional.",
+      "prompt": "Create a visually stunning artwork with a poetic reference to the following statement: '#{style}'. Infuse the creation with the essence of the artist's description of the project: '#{content}'. Incorporate vibrant colors, surreal elements, and a sense of tranquility to evoke a mood of peaceful exploration. Feel free to draw inspiration from artists like #{artist_list}. Provide multiple variations showcasing different perspectives and interpretations.",
       "n": 1, # number of images to generate
       "size": "1024x1024", # size of image to generate
     }
-  end
+  end  
 
   def self.artist_prompt(content, style)
     {
@@ -13,7 +14,7 @@ module OpenAiParameters
       "messages": [
         {
           "role": "user",
-          "content": "As an artist specializing in #{style}, I'm eager to elevate my skills and creativity. With a focus on my current goals—#{content}, I'm reaching out for guidance. Could you recommend three specific action steps I should take to further enhance my craft?"
+          "content": "As an artist looking for ideas related to #{style}, I'm eager to elevate my skills and creativity. My focus is this: #{content}, I'm reaching out for guidance. Could you recommend three specific action steps I should take next?"
         },
         {
           "role": "assistant",
@@ -44,5 +45,9 @@ module OpenAiParameters
         }
       ]
     }
+  end
+
+  def self.artist_sample_list
+    ["Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Salvador Dalí", "Georgia O'Keeffe", "Frida Kahlo", "Michelangelo", "Jackson Pollock", "Andy Warhol", "Rembrandt", "Edvard Munch", "Henri Matisse", "Gustav Klimt", "Mark Rothko", "Yayoi Kusama", "Banksy", "Kazimir Malevich", "Fernando Botero", "Joan Miró", "Diego Rivera", "Hokusai", "Roy Lichtenstein", "Ai Weiwei", "Marcel Duchamp", "Jean-Michel Basquiat", "Piet Mondrian", "Caravaggio"]
   end
 end

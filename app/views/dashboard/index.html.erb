@@ -1,43 +1,43 @@
 <% if !current_session %>
-  <%= render 'shared/login' %>
+  <div id="home-container">
+    <%= render 'shared/login' %>
+    <%= stylesheet_link_tag 'home-container' %>
+  </div>
 <% else %>
 
   <div class="container mt-4">
-    <div class="row">
+    <main class="row">
       <div class="col-md-6 offset-md-3">
         <div class="card">
-          <div class="card-body">
+          <section class="card-body">
+            <% if @artist.avatar.attached? %>
+              <div class="mt-3 d-flex flex-column align-items-left">
+                <%= image_tag @artist.avatar, style: "width: 200px; height: 200px;", class: "rounded-circle" %><br />
+                <%= link_to artist_path(@artist) do %>
+                  <div class="btn btn-primary mt-2">View Ideas and AI Prompt</div>
+                <% end %>
+              </div>
+            <% end %>
+            <br />
             <h1><%= @zen_statement + @artist.name %></h1>
             <div><strong>Style:</strong> <%= @artist.style %></div>
             <div><strong>Bio:</strong> <%= @artist.bio %></div>
             
-            <% if @artist.avatar.attached? %>
-              <div class="mt-3">
-                <%= link_to artist_path(@artist) do %>
-                  <%= image_tag @artist.avatar, style: "width: 100px; height: 100px;", class: "rounded-circle" %>
+            <br />
+            <div class="d-grid gap-2 d-md-flex justify-content-end align-items-center">
+              <div class="me-3 upload-avatar">
+                <%= form_with(model: @artist, url: upload_avatar_artist_path(@artist), method: :patch, local: true) do |form| %>
+                  <%= form.file_field :avatar, class: 'form-control' %>
+                  <%= form.submit "Upload", class: 'btn btn-outline-primary mt-2' %>
                 <% end %>
               </div>
-            <% end %>
-
-            <div class="mt-3 upload-avatar">
-              <%= form_with(model: @artist, url: upload_avatar_artist_path(@artist), method: :patch, local: true) do |form| %>
-                <%= form.label :avatar, "Upload Avatar", class: "form-label" %>
-                <%= form.file_field :avatar, class: 'form-control' %>
-                <%= form.submit "Upload", class: 'btn btn-primary mt-2' %>
-              <% end %>
+                <%= link_to "Edit Profile", edit_artist_path(@artist), class: 'btn btn-warning me-3', style: 'width: 100px;' %>
+                <%= button_to "Delete Profile", artist_path(@artist), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
             </div>
-
-            <div class="mt-3">
-              <%= link_to "Edit Info", edit_artist_path(@artist), class: 'btn btn-primary' %>
-            </div>
-
-            <div class="mt-3">
-              <%= button_to "Delete Profile", artist_path(@artist), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 
 <% end %>

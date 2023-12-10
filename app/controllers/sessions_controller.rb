@@ -12,6 +12,9 @@ class SessionsController < ApplicationController
   end
 
   def logout
+    message = "Your session has expired. Please login again." if params[:timeout].present?
+    message = "You have successfully logged out" if params[:timeout].nil?
+    
     log_out_artist
     flash[:info] = "You have successfully logged out"
     redirect_to root_path

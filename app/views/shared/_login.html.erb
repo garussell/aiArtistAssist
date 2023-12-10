@@ -1,15 +1,36 @@
-
-<div class="artist-login">
-  <p>New to Artist AI Assist? <%= link_to "Click Here to create an account", new_artist_path %></p>
-  <h2>Artist login</h2>
-
-  <%= form_with(url: sessions_login_path, method: :post, id: "user-login-form", local: true) do |form| %>
-    <%= form.label :email, "Email" %>
-    <%= form.text_field :email, placeholder: "Enter your email" %>
+<br />
+<div class="custom-bg-opacity mt-5">
+  <div class="card-body">
     <br />
-    <%= form.label :password, "Password" %>
-    <%= form.password_field :password, placeholder: "Enter your password" %>
-    <br />
-    <%= form.submit "Login" %>
-  <% end %>
+    <div class="artist-login">
+      <h3 class="login-header-italics">Login</h3>
+
+      <%= form_with(url: sessions_login_path, method: :post, id: "user-login-form", local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :email, "Email", class: "form-label" %>
+          <%= form.text_field :email, class: "form-control", placeholder: "Enter your email", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password, "Password", class: "form-label" %>
+          <%= form.password_field :password, class: "form-control", placeholder: "Enter your password", required: true %>
+        </div>
+
+        <%= form.submit "Login", class: "btn btn-primary btn-block" %>
+      <% end %>
+
+      <div class="signup-link">
+        <p>New to Artist AI Assist?</p>
+        <p><%= link_to "Click Here to create an account", new_artist_path %></p>
+      </div>
+    </div>
+  </div>
 </div>
+<footer>
+  <div class="footer">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center">© 2024 aiArtist Assist</p>
+      </div>
+    </div>
+  </div>
