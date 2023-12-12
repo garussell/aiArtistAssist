@@ -59,15 +59,16 @@ class ArtistFilesController < ApplicationController
 
       redirect_to artist_path(@artist)
   end
-
+  
   private
 
   def set_artist
-    @artist = Artist.find(params[:artist_id])
+    @artist = Artist.find(session[:artist_id]) if session[:artist_id].present?
     @artist_files = @artist.artist_files
   end
 
   def artist_file_params
     params.require(:artist_file).permit(:goals, :saved_image, :style, :other_style, artist: [:style])
   end
+
 end

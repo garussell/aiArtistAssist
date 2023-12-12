@@ -1,40 +1,49 @@
-<h2>Update Info</h2>
-<%= form_with model: @artist, method: :patch, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name, placeholder: "Preferred Name" %>
-  <br />
-  <%= form.label :email %>
-  <%= form.email_field :email, placeholder: "Email" %>
-  <br />
-  <%= form.label :style %>
-  <%= form.text_field :style, placeholder: "Style" %>
-  <br />
-  <%= form.label :bio %>
-  <%= form.text_area :bio, placeholder: "Bio" %>
-  <br />
-  <%= form.label :current_password %>
-  <%= form.password_field :current_password, placeholder: "Enter your current password" %>
-   <label>
-    Update Password:
-    <input type="checkbox" id="toggle-password" value="1">
-  </label>
-  <br />
-  <div id="password-fields" class="hide">
-    <br />
-    <%= form.label :password %>
-    <%= form.password_field :password, placeholder: "Enter new password" %>
-    <br />
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, placeholder: "Confirm new password" %>
-    <br />
-  </div>
-  <br />
-  <%= link_to "Cancel", :back %>
-  <br />
-  <br />
-  <%= form.submit "Update Profile" %>
-  <br />
-<% end %>
+<div class="container mt-5">
+  <h2>Update Info</h2>
+  <%= form_with model: @artist, method: :patch, local: true do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Preferred Name" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", placeholder: "Email" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :style, class: "form-label" %>
+      <%= form.text_field :style, class: "form-control", placeholder: "Style" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :bio, class: "form-label" %>
+      <%= form.text_area :bio, class: "form-control", placeholder: "Bio" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :current_password, class: "form-label" %>
+      <%= form.password_field :current_password, class: "form-control", placeholder: "Enter your current password" %>
+    </div>
+    <div class="mb-3">
+      <label class="form-check-label">
+        Update Password:
+        <input type="checkbox" id="toggle-password" class="form-check-input" value="1">
+      </label>
+    </div>
+    <div id="password-fields" class="hide">
+      <div class="mb-3">
+        <%= form.label :password, class: "form-label" %>
+        <%= form.password_field :password, class: "form-control", placeholder: "Enter new password" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :password_confirmation, class: "form-label" %>
+        <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+    </div>
+    <div class="mb-3">
+      <%= form.submit "Update Profile", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 
-<%= javascript_include_tag "updatePassword" %>
-
+  <%= javascript_include_tag "updatePassword" %>
+</div>
