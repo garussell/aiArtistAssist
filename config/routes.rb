@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   # Artist Resources
   resources :artists do
-    resources :artist_files
+    resources :artist_files do
+      member do
+        get 'previous_artist_file'
+        get 'next_artist_file'
+      end
+    end
 
     member do
       patch 'upload_avatar'

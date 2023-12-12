@@ -34,9 +34,11 @@
               <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
             </div>
           </div>
-
-          <% unless current_page?(root_path) %>
-            <a class="nav-link <%= 'active' if current_page?(root_path) %>" href="<%= root_path %>">My Profile</a>
+      
+          <% if current_page?(root_path) %>
+            <a class="nav-link <%= 'active' if current_page?(artist_path(@artist)) %>" href="<%= artist_path(@artist) %>">Ideas</a>
+          <% else %>
+            <a class="nav-link <%= 'active' if current_page?(root_path) %>" href="<%= root_path %>">Profile</a>
           <% end %>
         </div>
 

@@ -28,7 +28,7 @@
               <div class="me-3 upload-avatar">
                 <%= form_with(model: @artist, url: upload_avatar_artist_path(@artist), method: :patch, local: true) do |form| %>
                   <%= form.file_field :avatar, class: 'form-control' %>
-                  <%= form.submit "Upload Avatar", class: 'btn btn-outline-primary mt-2' %>
+                  <%= form.submit "Upload Avatar", class: 'btn btn-primary mt-2' %>
                 <% end %>
               </div>
                 <%= link_to "Edit Profile", edit_artist_path(@artist), class: 'btn btn-warning me-3', style: 'width: 100px;' %>
