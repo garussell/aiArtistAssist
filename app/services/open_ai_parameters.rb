@@ -2,7 +2,7 @@ module OpenAiParameters
   def self.image_prompt(content, style)
     artist_list = artist_sample_list.sample(3).join(", ")
     {
-      "prompt": "Create a visually stunning artwork with a poetic reference to the following statement: '#{style}'. Infuse the creation with the essence of the artist's description of the project: '#{content}'. Incorporate vibrant colors, surreal elements, and a sense of tranquility to evoke a mood of peaceful exploration. Feel free to draw inspiration from artists like #{artist_list}. Provide multiple variations showcasing different perspectives and interpretations.",
+      "prompt": "Create a visually stunning artwork with a poetic reference to the following statement: '#{style}'. Infuse the creation with the essence of the artist's description of the project: '#{content}'. Incorporate vibrant colors, surreal elements, and a sense of tranquility to evoke a mood of peaceful exploration. Feel free to draw inspiration from artists like #{artist_list}.",
       "n": 1, # number of images to generate
       "size": "1024x1024", # size of image to generate
     }

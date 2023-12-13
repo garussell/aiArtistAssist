@@ -9,31 +9,38 @@
 
         <!-- AI Prompt Section -->
         <div class="ai-prompt-section card">
-            <h2>AI Prompt</h2>
-            <%= form_for [@artist, ArtistFile.new] do |f| %>
-                <div>
-                    <h3><%= @style_question %></h3>
-                    <%= f.fields_for @artist do |artist_form| %>
-                        <%= artist_form.text_field :style %>
+            <div class="card-header">
+                <h2 class="card-title">New Idea</h2>
+            </div>
+            <div class="card-body">
+                <%= form_for [@artist, ArtistFile.new], html: { class: 'form' } do |f| %>
+                <div class="form-group">
+                    <h4 class="mb-md-4"><%= @style_question %></h4>
+                    <%= f.fields_for @artist, html: { class: 'form' } do |artist_form| %>
+                    <%= artist_form.label :style, class: 'form-label' %>
+                    <%= artist_form.text_field :style, class: 'form-control' %>
                     <% end %>
                 </div>
-                <div>
-                    <h3><%= @goal_question %></h3>
-                    <%= f.text_area :goals %>
+                <div class="form-group">
+                    <h4 class="mb-md-4"><%= @goal_question %></h4>
+                    <%= f.label :goals, class: 'form-label' %>
+                    <%= f.text_area :goals, class: 'form-control' %>
                 </div>
-                <br />
-                <div>
+                <br>
+                <div class="form-group">
                     <%= f.submit "Get Prompt", class: 'btn btn-primary' %>
                 </div>
-            <% end %>
+                <% end %>
+            </div>
         </div>
+
 
         <!-- Collection of Prompts -->
         <div class="collection-of-prompts card">
             <% if @artist_files.count > 0 %>
                 <h2>Collection of Ideas</h2>
                 <div class="card-group">
-                    <% @artist_files.reverse_each.with_index do |artist_file| %>
+                    <% @artist_files.each.with_index do |artist_file| %>
                         <div class="card">
                             <h4><%= artist_file.style %></h4>
                             <% if artist_file.saved_image.attached? %>

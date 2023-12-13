@@ -1,5 +1,5 @@
 class ArtistFilesController < ApplicationController
-  before_action :set_artist
+  before_action :set_artist, :require_login
 
   def show
     @artist_file = @artist.artist_files.find(params[:id])

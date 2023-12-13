@@ -15,6 +15,7 @@
     
     <div class="col-md-6">
       <div class="d-flex justify-content-end align-items-center">
+        <%= link_to 'Back', artist_path(@artist), class: 'btn btn-dark me-2' %>
         <%= button_to 'Get New AI Photo', artist_artist_file_path(@artist, @artist_file), method: :patch, params: { fetch_new_image: true }, class: 'btn btn-primary me-2' %>
       </div>
       <div>
@@ -60,7 +61,6 @@
       </div>
 
     <div class="d-flex justify-content-between">
-      <%= link_to 'Back', artist_path(@artist), class: 'btn btn-dark' %>
       <%= button_to "Delete", artist_artist_file_path(@artist, @artist_file), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     </div>
     <br />
