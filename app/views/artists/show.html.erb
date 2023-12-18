@@ -39,7 +39,7 @@
         <div class="collection-of-prompts card">
             <% if @artist_files.count > 0 %>
                 <h2>Collection of Ideas</h2>
-                <div class="card-group">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
                     <% @artist_files.each.with_index do |artist_file| %>
                         <div class="card">
                             <h4><%= artist_file.style %></h4>

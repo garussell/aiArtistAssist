@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8t+8VXlCvlK5k0UgjjPeMsVsHAn7bZg7zSHZMKZ4jhS/N52D5CkJKDAKpK5" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %> <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "toggleMode" %>
+    <%= javascript_include_tag "toggleDarkMode" %>
     <%= javascript_include_tag "updatePassword" %>
   </head>
 
@@ -40,6 +40,8 @@
               <% end %>
           <% end %>
       <% end %>
+
     <%= yield %>
+
   </body>
 </html>
