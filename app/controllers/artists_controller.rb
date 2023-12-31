@@ -1,9 +1,9 @@
 class ArtistsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, only: [:edit, :update, :destroy]
 
-def index; end
+  def index; end
 
-def show
+  def show
     @artist = Artist.find_by(id: params[:id])
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @style_question = QuestionsModule.random_style_question
