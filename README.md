@@ -1,5 +1,5 @@
 # Artist Assist
-[Video Walkthrough](https://www.loom.com/share/990ecc78c6124d738f0bd588aba7b5c6)
+[Video Walkthrough]([https://www.loom.com/share/990ecc78c6124d738f0bd588aba7b5c6](https://www.loom.com/share/2a21a2152b024118bf7d3df30188410d))
 
 ## Overview
 
