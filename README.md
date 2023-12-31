@@ -1,4 +1,6 @@
 # Artist Assist
+[Video Walkthrough](https://www.loom.com/share/990ecc78c6124d738f0bd588aba7b5c6)
+
 ## Overview
 
 The Artist Prompts API is a Rails application that leverages OpenAI's GPT-3.5 Turbo model to generate prompts and suggestions for artists. It allows artists to receive personalized recommendations for their goals, action steps, and resources based on their input.
