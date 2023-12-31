@@ -1,26 +1,34 @@
-<h2>Create A Profile</h2>
+<div class="container mt-5">
+  <h2>Create A Profile</h2>
   <%= form_with(model: @artist, url: artists_path, method: :post, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Preferred Name" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", placeholder: "Email" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :style, class: "form-label" %>
+      <%= form.text_field :style, class: "form-control", placeholder: "Main Style" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :bio, class: "form-label" %>
+      <%= form.text_area :bio, class: "form-control", placeholder: "Tell us about you" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Enter new password" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
+    </div>
+    <div class="mb-3">
+      <%= form.submit "Create Profile", class: "btn btn-primary" %>
+    </div>
 
-  <%= form.label :name %>
-  <%= form.text_field :name, placeholder: "Preferred Name" %>
-  <br />
-  <%= form.label :email %>
-  <%= form.email_field :email, placeholder: "Email" %>
-  <br />
-  <%= form.label :style %>
-  <%= form.text_field :style, placeholder: "Main Style" %>
-  <br />
-  <%= form.label :bio %>
-  <%= form.text_area :bio, placeholder: "Tell us about you" %>
-  <br />
-  <%= form.label :password %>
-  <%= form.password_field :password, placeholder: "Enter new password" %>
-  <br />
-  <%= form.label :password_confirmation %>
-  <%= form.password_field :password_confirmation, placeholder: "Confirm new password" %>
-  <br />
-  <%= form.submit "Create Profile" %>
-  <br />
-
-  <%= link_to "Cancel", :back %>
-<% end %>
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+  <% end %>
+</div>
